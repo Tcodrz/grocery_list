@@ -1,0 +1,111 @@
+{
+  "configVersion": 1,
+  "timestamp": 1641682619429,
+  "index": "https://GithubUserName.github.io/grocery_list/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "https://GithubUserName.github.io/grocery_list/favicon.ico",
+        "https://GithubUserName.github.io/grocery_list/index.html",
+        "https://GithubUserName.github.io/grocery_list/main.0c1274cdcbaba9f1.js",
+        "https://GithubUserName.github.io/grocery_list/manifest.webmanifest",
+        "https://GithubUserName.github.io/grocery_list/polyfills.3715f7d29f9322a1.js",
+        "https://GithubUserName.github.io/grocery_list/runtime.edc2369bbf6d5f46.js",
+        "https://GithubUserName.github.io/grocery_list/styles.cf673a60a546e58f.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "https://GithubUserName.github.io/grocery_list/Inter-Bold.579e0f95cacfae57.woff2",
+        "https://GithubUserName.github.io/grocery_list/Inter-Bold.b1234477a53679d3.woff",
+        "https://GithubUserName.github.io/grocery_list/Inter-Light.27083fa6375bb9ef.woff2",
+        "https://GithubUserName.github.io/grocery_list/Inter-Light.91dfddd8421c4c01.woff",
+        "https://GithubUserName.github.io/grocery_list/Inter-Medium.dc792b508e6f91c7.woff2",
+        "https://GithubUserName.github.io/grocery_list/Inter-Medium.ec7dd2d9d89c37d7.woff",
+        "https://GithubUserName.github.io/grocery_list/Inter-Regular.f1f0c35b32161446.woff2",
+        "https://GithubUserName.github.io/grocery_list/Inter-Regular.f356e84aa04db28f.woff",
+        "https://GithubUserName.github.io/grocery_list/Inter-SemiBold.55027e4724a1928b.woff",
+        "https://GithubUserName.github.io/grocery_list/Inter-SemiBold.fcb100c7607696fd.woff2",
+        "https://GithubUserName.github.io/grocery_list/assets/icons/icon-128x128.png",
+        "https://GithubUserName.github.io/grocery_list/assets/icons/icon-144x144.png",
+        "https://GithubUserName.github.io/grocery_list/assets/icons/icon-152x152.png",
+        "https://GithubUserName.github.io/grocery_list/assets/icons/icon-192x192.png",
+        "https://GithubUserName.github.io/grocery_list/assets/icons/icon-384x384.png",
+        "https://GithubUserName.github.io/grocery_list/assets/icons/icon-512x512.png",
+        "https://GithubUserName.github.io/grocery_list/assets/icons/icon-72x72.png",
+        "https://GithubUserName.github.io/grocery_list/assets/icons/icon-96x96.png",
+        "https://GithubUserName.github.io/grocery_list/color.dae87a04d07ca92b.png",
+        "https://GithubUserName.github.io/grocery_list/hue.8b1818380241e6ac.png",
+        "https://GithubUserName.github.io/grocery_list/primeicons.29151a741d66863a.woff",
+        "https://GithubUserName.github.io/grocery_list/primeicons.5f5d08cd089b4e5d.ttf",
+        "https://GithubUserName.github.io/grocery_list/primeicons.76044b1c189cc4d7.svg"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "https://GithubUserName.github.io/grocery_list/Inter-Bold.579e0f95cacfae57.woff2": "1e94a0dfac8bab0947ea9b0b6fb663ebad5cceb5",
+    "https://GithubUserName.github.io/grocery_list/Inter-Bold.b1234477a53679d3.woff": "e5a49e5a28119e960539a6de0bf8f72b810362af",
+    "https://GithubUserName.github.io/grocery_list/Inter-Light.27083fa6375bb9ef.woff2": "0a0ce8dc92ba6f20af57eeb341e160375f971268",
+    "https://GithubUserName.github.io/grocery_list/Inter-Light.91dfddd8421c4c01.woff": "996364439cd77723dfd2d3941946e63b66122e9f",
+    "https://GithubUserName.github.io/grocery_list/Inter-Medium.dc792b508e6f91c7.woff2": "92b30527304b5dc80f45e997e0b1ac4c70110a18",
+    "https://GithubUserName.github.io/grocery_list/Inter-Medium.ec7dd2d9d89c37d7.woff": "cad8cfc84ebf610138aef63e6949097ff48d72dd",
+    "https://GithubUserName.github.io/grocery_list/Inter-Regular.f1f0c35b32161446.woff2": "f96348260751ea78b1d23e9557db297290bdaf28",
+    "https://GithubUserName.github.io/grocery_list/Inter-Regular.f356e84aa04db28f.woff": "729a4551b9cc5979f39347279d6fedc6620bf141",
+    "https://GithubUserName.github.io/grocery_list/Inter-SemiBold.55027e4724a1928b.woff": "7ae96ab990c7881f82947c1bdc47f41794b848d7",
+    "https://GithubUserName.github.io/grocery_list/Inter-SemiBold.fcb100c7607696fd.woff2": "dfa9f8f3d79bf8a0001fe72eeadad0490cba59cc",
+    "https://GithubUserName.github.io/grocery_list/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "https://GithubUserName.github.io/grocery_list/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "https://GithubUserName.github.io/grocery_list/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "https://GithubUserName.github.io/grocery_list/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "https://GithubUserName.github.io/grocery_list/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "https://GithubUserName.github.io/grocery_list/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "https://GithubUserName.github.io/grocery_list/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "https://GithubUserName.github.io/grocery_list/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "https://GithubUserName.github.io/grocery_list/color.dae87a04d07ca92b.png": "ff4c4bcb2207891b292f544edb4da9d2df5d45cf",
+    "https://GithubUserName.github.io/grocery_list/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "https://GithubUserName.github.io/grocery_list/hue.8b1818380241e6ac.png": "f81ae627637a684614aa726e206c73ce099a01fd",
+    "https://GithubUserName.github.io/grocery_list/index.html": "3b59ce031a5fff8c6e0961c0ceb86525ba0859f3",
+    "https://GithubUserName.github.io/grocery_list/main.0c1274cdcbaba9f1.js": "390075d7e6e149f20b122d4f433b8a62031038aa",
+    "https://GithubUserName.github.io/grocery_list/manifest.webmanifest": "a4e2cab399ed99b710305dd893bb41d72238c790",
+    "https://GithubUserName.github.io/grocery_list/polyfills.3715f7d29f9322a1.js": "bb04ae2f95b01b341ba4168788f55fdc8b65e8da",
+    "https://GithubUserName.github.io/grocery_list/primeicons.29151a741d66863a.woff": "21e477ea19e15b66344bcc23b3fbb2161092a707",
+    "https://GithubUserName.github.io/grocery_list/primeicons.5f5d08cd089b4e5d.ttf": "e6c86ca90a9fb4282fb35523d56fde00e78a1416",
+    "https://GithubUserName.github.io/grocery_list/primeicons.76044b1c189cc4d7.svg": "621775b2ec555fd2dd152a24390cf6dfeee168b1",
+    "https://GithubUserName.github.io/grocery_list/runtime.edc2369bbf6d5f46.js": "e227643efa531e92aa4208304e867374bcc6cbee",
+    "https://GithubUserName.github.io/grocery_list/styles.cf673a60a546e58f.css": "66f9180839cc27f60a3cf92a3f3e5fb10feb885b"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}

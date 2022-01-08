@@ -1,18 +1,2 @@
-<p-listbox [options]="items" [(ngModel)]="selectedItems" optionLabel="sName" [multiple]="true" [filter]="true"
-           (ngModelChange)="onSelect()">
-  <ng-template let-item pTemplate="header">
-    <h2 class="text-right">רשימת קניות</h2>
-    <div>
-      <button *ngIf="bShowTrash" (click)="removeItems()" pButton type="button" class="p-button-rounded p-button-danger"
-              icon="pi pi-trash"></button>
-      <button pButton type="button" class="p-button-rounded p-button-secondary" icon="pi pi-plus"></button>
-    </div>
-  </ng-template>
-  <ng-template let-item pTemplate="item">
-    <ng-template let-group pTemplate="group">
-      <div>{{group}}</div>
-    </ng-template>
-    <div>{{item.sName}}</div>
-    <div>{{item.iAmount}}</div>
-  </ng-template>
-</p-listbox>
+<gl-list></gl-list>
+<gl-modal-generic></gl-modal-generic>

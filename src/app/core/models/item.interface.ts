@@ -1,5 +1,5 @@
 export interface Item {
-    sID: string;
+    sID?: string;
     sName: string;
     iAmount: number;
 }

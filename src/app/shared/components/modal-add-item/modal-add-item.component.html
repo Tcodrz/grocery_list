@@ -1,0 +1,15 @@
+<div class="mt-2">
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <span class="p-float-label mb-2">
+      <input pInputText type="text" formControlName="sName">
+      <label for="sName">שם פריט</label>
+    </span>
+    <span class="p-float-label mb-2">
+      <input pInputText type="number" formControlName="iAmount">
+      <label for="iAmount">כמות</label>
+    </span>
+    <button pButton type="submit" class="p-button-raised">הוספה</button>
+  </form>
+
+</div>

@@ -1,0 +1,7 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="mt-3">
+  <span class="p-float-label mb-2">
+    <input pInputText type="text" formControlName="sName">
+    <label for="sName">שם הרשימה</label>
+  </span>
+  <button pButton type="submit" class="p-button-raised float-left" [disabled]="form.invalid">הוספה</button>
+</form>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 
 export interface Modal {
   open: boolean;
@@ -15,6 +15,7 @@ export type ModalParams = {
 })
 export class ModalGenericService {
   private _modal$: BehaviorSubject<Modal> = new BehaviorSubject<Modal>({open: false, params: {}});
+  private close$: Subject<void> = new Subject();
   constructor() { }
   get modal(): Observable<Modal> {
     return this._modal$.asObservable();
@@ -23,10 +24,14 @@ export class ModalGenericService {
     const p: Modal = { open: true, params: params };
     this._modal$.next(p);
   }
+  closed(): Observable<void> {
+    return this.close$.asObservable();
+  }
   afterClose(): void {
     this._modal$.next({
       open: false,
       params: {}
     });
+    this.close$.next();
   }
 }

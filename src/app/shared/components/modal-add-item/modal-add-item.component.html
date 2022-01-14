@@ -1,5 +1,4 @@
-<div class="mt-2">
-
+<div class="mt-3">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <span class="p-float-label mb-2">
       <input pInputText type="text" formControlName="sName">
@@ -9,7 +8,6 @@
       <input pInputText type="number" formControlName="iAmount">
       <label for="iAmount">כמות</label>
     </span>
-    <button pButton type="submit" class="p-button-raised">הוספה</button>
+    <button pButton type="submit" class="p-button-raised float-left" [disabled]="form.invalid">הוספה</button>
   </form>
-
 </div>

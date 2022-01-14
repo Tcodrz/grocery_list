@@ -1,3 +1,4 @@
 <p-dialog header="{{ (modal$ | async).params.sTitle }}" [(visible)]="bShow" (onHide)="onHide()">
   <gl-modal-add-item *ngIf="(modal$ | async).params.sComponent === 'add-item'" (close)="onHide()"></gl-modal-add-item>
+  <gl-modal-add-list *ngIf="(modal$ | async).params.sComponent === 'add-list'" (close)="onHide()"></gl-modal-add-list>
 </p-dialog>

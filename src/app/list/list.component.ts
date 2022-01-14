@@ -1,3 +1,5 @@
+import * as ListsActions from './../state/lists/lists.actions';
+import { List } from './../core/models/list.interface';
 import { ModalGenericService } from './../shared/services/modal-generic.service';
 import { Add, Remove } from './../state/items/items.actions';
 import { Component, OnInit } from '@angular/core';
@@ -14,26 +16,33 @@ import { AppState } from '../state';
 export class ListComponent implements OnInit {
   bShowTrash: boolean;
   items: Observable<Item[]>;
+  list: List;
   selectedItems: Item[] = [];
+  iCurrentIndex: number;
   constructor(
     private store: Store<AppState>,
     private modal: ModalGenericService
   ) { }
   ngOnInit(): void {
-    this.store.dispatch(Add({ payload: { sID: '1', sName: 'חלב', iAmount: 1 }}));
-    this.store.dispatch(Add({ payload: { sID: '2', sName: 'לחמניות', iAmount: 6 }}));
-    this.store.dispatch(Add({ payload: { sID: '3', sName: 'ביצים', iAmount: 12 }}));
-    this.items = this.store.select('list').pipe(map(list => list.items));
+    this.store.dispatch(ListsActions.Load());
+    this.init();
+    this.modal.closed().subscribe(() => {
+      this.init();
+    })
   }
-  onSelect() {
+  private init(): void {
+    this.store.select('listState').subscribe(listState => {
+      this.list = listState.lists[listState.iCurrentList];
+      this.iCurrentIndex = listState.iCurrentList;
+    });
+  }
+  onSelect(): void {
     this.bShowTrash = this.selectedItems.length > 0;
   }
-  removeItems() {
-    this.selectedItems.forEach(item => this.store.dispatch(Remove({ payload: item })))
-    this.selectedItems = [];
-    this.bShowTrash = false;
+  removeItems(): void {
+    this.selectedItems.forEach(item => this.store.dispatch(ListsActions.RemoveItemsFromList({ payload: { listID: this.list._id, items: this.selectedItems } })))
   }
-  onAddItem() {
+  onAddItem(): void {
     this.modal.open({
       sComponent: 'add-item',
       sTitle: 'הוספת פריט'

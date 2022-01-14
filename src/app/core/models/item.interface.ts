@@ -1,5 +1,6 @@
 export interface Item {
-    sID?: string;
-    sName: string;
-    iAmount: number;
+  _id?: string;
+  sName: string;
+  iAmount: number;
+  sListID: string;
 }

@@ -61,5 +61,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   toggleRegistered(): void {
     this.bShowRegister = !this.bShowRegister;
     this.sLinkText = this.bShowRegister ? 'יש לי חשבון' : 'אני רוצה להירשם';
+    if (this.bShowRegister) this.loginForm.patchValue({ sEmail: '' });
   }
 }

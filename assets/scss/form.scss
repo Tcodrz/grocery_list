@@ -1,0 +1,29 @@
+.form-container {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+
+  .form-header {
+    margin-top: 0;
+  }
+
+  form {
+    width: fit-content;
+  }
+
+  span.p-float-label {
+    margin-top: 2rem;
+  }
+
+  .btn-container {
+    button {
+      width: -webkit-fill-available;
+    }
+  }
+
+  .link.text-center {
+    margin-top: 10px;
+  }
+}

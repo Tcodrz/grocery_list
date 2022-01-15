@@ -1,13 +1,11 @@
-import { ModalGenericService, ModalParams } from './../shared/services/modal-generic.service';
-import { UsersGetService } from './../core/services/users-get.service';
-import { User } from './../core/models/user.interface';
-import { List } from './../core/models/list.interface';
-import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { AppState } from '../state';
-import * as UsersActions from '../state/users/users.actions';
 import * as ListsActions from '../state/lists/lists.actions';
+import { List } from './../core/models/list.interface';
+import { User } from './../core/models/user.interface';
+import { ModalGenericService } from './../shared/services/modal-generic.service';
 
 @Component({
   selector: 'gl-admin',

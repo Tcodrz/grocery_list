@@ -3,8 +3,9 @@ export enum ApiRoutes {
 }
 
 export enum ApiListRoutes {
-  Add = '',
-  Get = '',
+  GetAll = '',
+  AddList = 'add-list',
+  Load = 'load',
 }
 
 export enum ApiListItemRoutes {

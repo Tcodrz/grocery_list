@@ -4,4 +4,7 @@ export interface User {
   sLastName?: string;
   sEmail?: string;
   sPassword?: string;
+  dCreated?: Date;
+  aGroupIDs: string[];
+  aListIDs: string[];
 }

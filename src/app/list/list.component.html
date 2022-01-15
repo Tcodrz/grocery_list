@@ -1,4 +1,4 @@
-<p-listbox [options]="list.items" [(ngModel)]="selectedItems" optionLabel="sName" [multiple]="true" [filter]="true"
+<p-listbox [options]="items" [(ngModel)]="selectedItems" optionLabel="sName" [multiple]="true" [filter]="true"
   (ngModelChange)="onSelect()">
   <ng-template let-item pTemplate="header">
     <h2 class="text-right">רשימת {{ list.sName }}</h2>
@@ -13,7 +13,7 @@
     <ng-template let-group pTemplate="group">
       <div>{{group}}</div>
     </ng-template>
-    <div>{{item.sName}}</div>
-    <div>{{item.iAmount}}</div>
+    <div *ngIf="items.length > 0">{{item.sName}}</div>
+    <div *ngIf="items.length > 0">{{item.iAmount}}</div>
   </ng-template>
 </p-listbox>

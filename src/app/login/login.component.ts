@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   get title(): string { return this.bShowRegister ? 'הרשמה' : 'כניסה' }
   ngOnInit(): void {
     this.subscription = this.store.select('userState').subscribe(state => {
-      if (state.bIsLoggedIn) this.router.navigate(['lists']);
+      if (state.bIsLoggedIn) this.router.navigate(['admin', { sUserID: state.user._id }]);
       this.bShowRegister = !state.bIsUser;
       if (!this.bShowRegister) {
         this.user = state.user;

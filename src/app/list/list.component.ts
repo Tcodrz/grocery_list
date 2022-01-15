@@ -15,7 +15,7 @@ import { AppState } from '../state';
 })
 export class ListComponent implements OnInit {
   bShowTrash: boolean;
-  items: Observable<Item[]>;
+  items: Item[];
   list: List;
   selectedItems: Item[] = [];
   iCurrentIndex: number;
@@ -24,7 +24,6 @@ export class ListComponent implements OnInit {
     private modal: ModalGenericService
   ) { }
   ngOnInit(): void {
-    this.store.dispatch(ListsActions.Load());
     this.init();
     this.modal.closed().subscribe(() => {
       this.init();
@@ -33,6 +32,7 @@ export class ListComponent implements OnInit {
   private init(): void {
     this.store.select('listState').subscribe(listState => {
       this.list = listState.lists[listState.iCurrentList];
+      this.items = this.list.items;
       this.iCurrentIndex = listState.iCurrentList;
     });
   }

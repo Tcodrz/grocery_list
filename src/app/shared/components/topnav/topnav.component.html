@@ -1,1 +1,7 @@
-<p-menubar [model]="items$ | async"></p-menubar>
+<div class="mb-2">
+  <p-menubar [model]="items$ | async">
+    <ng-template pTemplate="start">
+      <button pButton class="p-button-text p-button-rounded user-menu"><i class="pi pi-user"></i></button>
+    </ng-template>
+  </p-menubar>
+</div>

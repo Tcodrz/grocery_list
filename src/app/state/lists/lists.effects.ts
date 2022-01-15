@@ -1,31 +1,43 @@
+import { User } from './../../core/models/user.interface';
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { catchError, EMPTY, map, mergeMap } from 'rxjs';
 import { AppState } from '..';
-import { ApiListItemRoutes, ApiRoutes } from './../../core/models/api-routes.enum';
+import { ApiListItemRoutes, ApiRoutes, ApiListRoutes } from './../../core/models/api-routes.enum';
 import { List } from './../../core/models/list.interface';
 import { ApiService } from './../../shared/services/api.service';
 import * as ListsActions from './lists.actions';
 import { ListsState } from './lists.reducer';
+import * as UsersActions from '../users/users.actions';
 
 @Injectable()
 export class ListsEffects {
   state: ListsState;
   load$ = createEffect(() => this.actions$.pipe(
     ofType(ListsActions.Load),
-    mergeMap(() => this.api.get<List[]>(this.api.buildUrl({ route: ApiRoutes.Lists }))
-      .pipe(
-        map(lists => (ListsActions.Loaded({ payload: lists })))
-      ))
+    mergeMap((action) => {
+      const url = this.api.buildUrl({ route: `${ApiRoutes.Lists}/${ApiListRoutes.Load}` });
+      return this.api.post<List[]>(url, { sUserID: action.sUserID })
+        .pipe(
+          map(lists => (ListsActions.Loaded({ payload: lists })))
+        )
+    })
   ));
   addList$ = createEffect(() => this.actions$.pipe(
     ofType(ListsActions.Add),
-    mergeMap((action) => this.api.post<List>(this.api.buildUrl({ route: ApiRoutes.Lists }), action.payload)
-      .pipe(
-        map((list) => (ListsActions.ListAdded({ payload: list }))),
-        catchError(() => EMPTY)
-      ))
+    mergeMap((action) => {
+      const url = this.api.buildUrl({ route: `${ApiRoutes.Lists}/${ApiListRoutes.AddList}` });
+      const { list, sUserID } = action.payload;
+      return this.api.post<{ list: List, user: User }>(url, { list, sUserID })
+        .pipe(
+          map(({ list, user }) => {
+            this.store.dispatch(UsersActions.UpdateUser({ payload: user }));
+            return ListsActions.ListAdded({ payload: list });
+          }),
+          catchError(() => EMPTY)
+        )
+    })
   ));
   addItemToList$ = createEffect(() => this.actions$.pipe(
     ofType(ListsActions.AddItemToList),

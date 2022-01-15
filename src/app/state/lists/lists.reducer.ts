@@ -15,14 +15,14 @@ export const initialState: ListsState = {
 
 const _listsReducer = createReducer(
   initialState,
+
   on(ListsActions.Loaded, (state, action) => {
     return {
       lists: action.payload,
       iCurrentList: 0
-    }
+    };
   }),
   on(ListsActions.ListAdded, (state, action) => {
-    debugger;
     const lists = [...state.lists, action.payload];
     const index = lists.findIndex(list => list._id === action.payload._id);
     return {

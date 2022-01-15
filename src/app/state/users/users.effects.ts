@@ -1,3 +1,4 @@
+import { List } from './../../core/models/list.interface';
 import { CacheService, AppCacheKeys } from './../../core/services/cache.service';
 import { User } from './../../core/models/user.interface';
 import { UsersRoutes } from './users-routes';
@@ -6,7 +7,7 @@ import { map, mergeMap, mergeMapTo } from 'rxjs';
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import * as UsersActions from './users.actions';
-
+import * as ListsActions from '../lists/lists.actions';
 
 @Injectable()
 export class UsersEffects {
@@ -36,6 +37,15 @@ export class UsersEffects {
       )
     })
   ));
+  getLists$ = createEffect(() => this.actions$.pipe(
+    ofType(UsersActions.GetUsersLists),
+    mergeMap((action) => {
+      const url = this.api.buildUrl({ route: `${UsersRoutes.Main}/${UsersRoutes.GetLists}` });
+      return this.api.post<List[]>(url, action.payload).pipe(
+        map((lists) => (ListsActions.AddLists({ payload: lists })))
+      )
+    })
+  ))
 
   constructor(
     private actions$: Actions,

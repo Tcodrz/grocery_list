@@ -8,3 +8,4 @@ export const UserLoggedIn = createAction('[USERS] USER LOGGEDIN', props<{ payloa
 export const GetUserFromCache = createAction('[USERS] GET FROM CAHCE', props<{ payload: User }>());
 export const GetUsersLists = createAction('[USERS] GET LISTS', props<{ payload: string }>());
 export const UpdateUser = createAction('[USERS] UPDATE USER', props<{ payload: User }>());
+export const Reset = createAction('[USERS] RESET');

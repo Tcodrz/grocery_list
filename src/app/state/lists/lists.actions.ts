@@ -13,3 +13,4 @@ export const ItemsRemovedFromList = createAction('[LISTS] ITEM REMOVED FROM LIST
 export const Load = createAction('[LISTS] LOAD', props<{ sUserID: string }>());
 export const Loaded = createAction('[LISTS] LOADED', props<{ payload: List[] }>());
 export const AddLists = createAction('[LISTS] ADD MANY', props<{ payload: List[] }>());
+export const Reset = createAction('[LISTS RESET');

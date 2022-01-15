@@ -10,12 +10,11 @@ export interface ListsState {
 
 export const initialState: ListsState = {
   lists: [],
-  iCurrentList: 0
+  iCurrentList: -1
 };
 
 const _listsReducer = createReducer(
   initialState,
-
   on(ListsActions.Loaded, (state, action) => {
     return {
       lists: action.payload,
@@ -62,7 +61,8 @@ const _listsReducer = createReducer(
       ...state,
       lists: state.lists.map(list => list._id === action.payload._id ? action.payload : list)
     };
-  })
+  }),
+  on(ListsActions.Reset, () => initialState)
 );
 
 export function listsReducer(state = initialState, action: Action): ListsState {

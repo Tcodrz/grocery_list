@@ -30,7 +30,8 @@ const _userReducer = createReducer(
       ...state,
       user: action.payload
     };
-  })
+  }),
+  on(UsersActions.Reset, () => initialUserState)
 );
 
 export function usersReducer(state = initialUserState, action: Action): UserState {

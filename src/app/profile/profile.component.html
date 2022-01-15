@@ -1,1 +1,47 @@
-<p>profile works!</p>
+<p-card class="form-container">
+  <h3 class="form-header">פרטים אישיים</h3>
+  <form [formGroup]="userDetails" (ngSubmit)="onUpdateUserDetails()">
+    <span class="p-float-label">
+      <input type="text" id="sFirstName" pInputText formControlName="sFirstName">
+      <label for="sFirstName">שם פרטי</label>
+    </span>
+    <span class="p-float-label">
+      <input type="text" id="sLastName" pInputText formControlName="sLastName">
+      <label for="sLastName">שם משפחה</label>
+    </span>
+    <span class="p-float-label">
+      <input type="text" id="sEmail" pInputText formControlName="sEmail">
+      <label for="sEmail">אימייל</label>
+    </span>
+    <div class="btn-container">
+      <button pButton type="submit" class="p-button-raised">עדכון</button>
+    </div>
+  </form>
+</p-card>
+
+<p-card>
+  <p-listbox [options]="lists" [(ngModel)]="selectedList" optionLabel="sName" [multiple]="false"
+    (ngModelChange)="onSelectList()">
+    <ng-template let-item pTemplate="header">
+      <h2 class="text-right">רשימות</h2>
+      <div style="width: auto;"></div>
+      <div>
+        <button *ngIf="bShowListEdit" pButton type="button" class="p-button-rounded p-button-secondary ml-1"
+          icon="pi pi-pencil" (click)="onEditList()"></button>
+        <button *ngIf="bShowTrashList" pButton type="button" class="p-button-rounded p-button-danger" icon="pi pi-trash"
+          (click)="onDeleteList()"></button>
+      </div>
+    </ng-template>
+    <ng-template let-item pTemplate="item">
+      <ng-template let-group pTemplate="group">
+        <div>{{group}}</div>
+      </ng-template>
+      <div>{{item.sName}}</div>
+      <div>{{item.iAmount}}</div>
+    </ng-template>
+  </p-listbox>
+</p-card>
+
+<p-card>
+  <h3>קבוצות</h3>
+</p-card>

@@ -1,0 +1,24 @@
+.p-float-label {
+  margin-top: 2.5rem;
+}
+
+.btn-container {
+  button {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    width: initial;
+    float: left;
+  }
+}
+
+.p-listbox .p-listbox-header {
+  justify-content: flex-end !important;
+}
+
+.form-container form {
+  margin: 0 auto;
+}
+
+.form-container {
+  align-items: inherit !important;
+}

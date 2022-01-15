@@ -1,14 +1,15 @@
-import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { MenuItem } from 'primeng/api';
 import { map, Observable } from 'rxjs';
+import { User } from 'src/app/core/models/user.interface';
 import { AppState } from 'src/app/state';
-import { setCurrentList } from './../../../state/lists/lists.actions';
+import * as UsersActions from '../../../state/users/users.actions';
+import { CacheService } from './../../../core/services/cache.service';
+import * as ListsActions from './../../../state/lists/lists.actions';
 import { ListsState } from './../../../state/lists/lists.reducer';
 import { ModalGenericService } from './../../services/modal-generic.service';
-import * as UsersActions from '../../../state/users/users.actions';
-import { User } from 'src/app/core/models/user.interface';
 
 @Component({
   selector: 'gl-topnav',
@@ -23,6 +24,7 @@ export class TopnavComponent implements OnInit {
   constructor(
     private store: Store<AppState>,
     private modalService: ModalGenericService,
+    private cache: CacheService,
     private router: Router,
   ) { }
 
@@ -72,7 +74,7 @@ export class TopnavComponent implements OnInit {
 
   private goToList(sListID: string): void {
     const iNextIndex = this.state.lists.findIndex(list => list._id === sListID);
-    this.store.dispatch(setCurrentList({ payload: iNextIndex }));
+    this.store.dispatch(ListsActions.setCurrentList({ payload: iNextIndex }));
   }
   private onAddList(): void {
     this.modalService.open({
@@ -80,6 +82,11 @@ export class TopnavComponent implements OnInit {
       sTitle: 'הוספת רשימה'
     });
   }
-  private logout(): void { this.store.dispatch(UsersActions.Logout()); }
+  private logout(): void {
+    this.store.dispatch(UsersActions.Logout());
+    this.store.dispatch(ListsActions.Reset())
+    this.cache.clear();
+    this.router.navigate(['login']);
+  }
   private gotoAdminPage(): void { this.router.navigate(['/admin/profile']) }
 }

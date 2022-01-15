@@ -1,4 +1,4 @@
-<p-card class="login-form">
+<p-card class="form-container">
   <h1 class="text-center">{{ title }}</h1>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <span *ngIf="bShowRegister" class="p-float-label">
@@ -19,7 +19,7 @@
     </span>
     <p class="link text-center" (click)="toggleRegistered()"> {{ sLinkText }}</p>
     <div class="btn-container">
-      <button pButton type="submit" class="p-button-raised">כניסה</button>
+      <button pButton type="submit" class="p-button-raised mt-2">כניסה</button>
     </div>
   </form>
 

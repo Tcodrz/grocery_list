@@ -10,6 +10,10 @@ body {
   //   padding: 0;
 }
 
+.p-dialog-mask {
+  background-color: rgba(82, 82, 82, 0.364);
+}
+
 .link {
   color: blue;
   text-decoration: underline;
@@ -22,11 +26,18 @@ body {
 .text-center {
   text-align: center;
 }
-
+.float-left {
+  float: left;
+}
 
 // FORMS
 .p-float-label label {
   right: .5rem
+}
+
+// MENU
+.p-menuitem-icon {
+  margin-left: 1rem;
 }
 
 

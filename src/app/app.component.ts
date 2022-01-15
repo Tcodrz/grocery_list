@@ -1,3 +1,4 @@
+import { map, Observable } from 'rxjs';
 import { User } from './core/models/user.interface';
 import { CacheService, AppCacheKeys } from './core/services/cache.service';
 import { Store } from '@ngrx/store';
@@ -11,6 +12,7 @@ import * as UsersActions from './state/users/users.actions';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  bIsUserLoggedIn$: Observable<boolean>;
   constructor(
     private store: Store<AppState>,
     private cache: CacheService,
@@ -21,6 +23,7 @@ export class AppComponent implements OnInit {
       const user = this.cache.getItem<User>(AppCacheKeys.User);
       this.store.dispatch(UsersActions.GetUserFromCache({ payload: user }));
     }
+    this.bIsUserLoggedIn$ = this.store.select('userState').pipe(map(userState => userState.bIsLoggedIn));
 
   }
 }

@@ -10,8 +10,17 @@ body {
   //   padding: 0;
 }
 
+.link {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .text-right {
   text-align: right;
+}
+.text-center {
+  text-align: center;
 }
 
 

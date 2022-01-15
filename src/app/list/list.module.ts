@@ -1,9 +1,8 @@
-import { SharedModule } from './../shared/shared.module';
-import { PrimeModule } from './../prime/prime.module';
-import { FormsModule } from '@angular/forms';
-import { StateModule } from './../state/state.module';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { PrimeModule } from './../prime/prime.module';
+import { SharedModule } from './../shared/shared.module';
 import { ListRoutingModule } from './list-routing.module';
 import { ListComponent } from './list.component';
 
@@ -17,7 +16,6 @@ import { ListComponent } from './list.component';
   imports: [
     CommonModule,
     ListRoutingModule,
-    StateModule,
     FormsModule,
     PrimeModule,
     SharedModule,

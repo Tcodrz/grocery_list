@@ -4,7 +4,7 @@ import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { MenubarModule } from 'primeng/menubar';
-
+import { CardModule } from 'primeng/card';
 
 
 @NgModule({
@@ -15,6 +15,7 @@ import { MenubarModule } from 'primeng/menubar';
     DialogModule,
     InputTextModule,
     MenubarModule,
+    CardModule,
   ],
   exports: [
     ListboxModule,
@@ -22,6 +23,7 @@ import { MenubarModule } from 'primeng/menubar';
     DialogModule,
     InputTextModule,
     MenubarModule,
+    CardModule,
   ]
 })
 export class PrimeModule { }

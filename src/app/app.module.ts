@@ -1,3 +1,4 @@
+import { StateModule } from './state/state.module';
 import { SharedModule } from './shared/shared.module';
 import { ListModule } from './list/list.module';
 import { NgModule } from '@angular/core';
@@ -19,6 +20,7 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     SharedModule,
     ListModule,
+    StateModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable

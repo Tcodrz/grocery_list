@@ -1,0 +1,26 @@
+<p-card class="login-form">
+  <h1 class="text-center">{{ title }}</h1>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <span *ngIf="bShowRegister" class="p-float-label">
+      <input type="text" id="sFirstName" pInputText formControlName="sFirstName">
+      <label for="sFirstName">שם פרטי</label>
+    </span>
+    <span *ngIf="bShowRegister" class="p-float-label">
+      <input type="text" id="sLastName" pInputText formControlName="sLastName">
+      <label for="sLastName">שם משפחה</label>
+    </span>
+    <span class="p-float-label">
+      <input type="text" id="sEmail" pInputText formControlName="sEmail">
+      <label for="sEmail">אימייל</label>
+    </span>
+    <span class="p-float-label">
+      <input type="password" id="sPassword" pInputText formControlName="sPassword">
+      <label for="sPassword">סיסמא</label>
+    </span>
+    <p class="link text-center" (click)="toggleRegistered()"> {{ sLinkText }}</p>
+    <div class="btn-container">
+      <button pButton type="submit" class="p-button-raised">כניסה</button>
+    </div>
+  </form>
+
+</p-card>

@@ -16,6 +16,9 @@
         "@schematics/angular:service": {
           "skipTests": true
         },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
         "@schematics/angular:application": {
           "strict": false
         }
@@ -112,7 +115,9 @@
               "src/assets",
               "src/manifest.webmanifest"
             ],
-            "styles": ["src/styles.scss"],
+            "styles": [
+              "src/styles.scss"
+            ],
             "scripts": []
           }
         }

@@ -1,0 +1,12 @@
+<ng-container>
+  <p-card class="mt-3">
+    <h1>שלום {{ user.sFirstName }}</h1>
+    <p>נראה שאין לך עדיין רשימות, לחץ
+      <span class="link" (click)="onAddList()">כאן</span> כדי להוסיף רשימה
+    </p>
+  </p-card>
+</ng-container>
+<ng-container *ngIf="usersLists.length">
+  <router-outlet></router-outlet>
+</ng-container>
+<h1>ADMIN MODULE</h1>

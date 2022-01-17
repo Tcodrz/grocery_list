@@ -33,9 +33,12 @@ export class UsersEffects {
     ofType(UsersActions.Login),
     mergeMap((action) => {
       const url = this.api.buildUrl({ route: `${UsersRoutes.Main}/${UsersRoutes.Login}` });
-      return this.api.post<User>(url, action.payload).pipe(
+      return this.api.post<{ token: string; user: User }>(url, action.payload).pipe(
+        map(res => {
+          this.cacheService.cache(AppCacheKeys.User, res.token);
+          return res.user;
+        }),
         map(user => {
-          this.cacheService.cache(AppCacheKeys.User, user);
           return UsersActions.UserLoggedIn({ payload: user });
         })
       )

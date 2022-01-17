@@ -16,21 +16,24 @@ export const initialUserState: UserState = {
 
 const _userReducer = createReducer(
   initialUserState,
-  on(UsersActions.UserLoggedIn, (state, action) => {
-    return {
-      ...state,
-      user: action.payload,
-      bIsLoggedIn: true
-    };
-  }),
-  on(UsersActions.GetUserFromCache, (state, action) => ({ ...state, user: action.payload, bIsUser: true })),
+  on(UsersActions.UserLoggedIn, (state, action) => ({
+    ...state,
+    user: action.payload,
+    bIsLoggedIn: true
+  })
+  ),
+  on(UsersActions.UserAuthenticated, (state, action) => ({
+    ...state,
+    user: action.payload,
+    bIsLoggedIn: true,
+    bIsUser: true
+  })),
   on(UsersActions.Logout, (state) => ({ ...state, bIsLoggedIn: false })),
-  on(UsersActions.UpdateUser, (state, action) => {
-    return {
-      ...state,
-      user: action.payload
-    };
-  }),
+  on(UsersActions.UpdateUser, (state, action) => ({
+    ...state,
+    user: action.payload
+  })
+  ),
   on(UsersActions.Reset, () => initialUserState)
 );
 

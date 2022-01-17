@@ -16,12 +16,16 @@ export class UsersEffects {
     ofType(UsersActions.Register),
     mergeMap((action) => {
       const url = this.api.buildUrl({ route: `${UsersRoutes.Main}/${UsersRoutes.Register}` });
-      return this.api.post<User>(url, action.payload).pipe(
-        map(user => {
-          this.cacheService.cache(AppCacheKeys.User, user);
-          return UsersActions.UserLoggedIn({ payload: user })
-        })
-      )
+      return this.api.post<{ token: string; user: User }>(url, action.payload)
+        .pipe(
+          map(res => {
+            this.cacheService.cache(AppCacheKeys.User, res.token);
+            return res.user;
+          }),
+          map(user => {
+            return UsersActions.UserLoggedIn({ payload: user })
+          })
+        )
     })
   ));
 
@@ -43,6 +47,15 @@ export class UsersEffects {
       const url = this.api.buildUrl({ route: `${UsersRoutes.Main}/${UsersRoutes.GetLists}` });
       return this.api.post<List[]>(url, action.payload).pipe(
         map((lists) => (ListsActions.AddLists({ payload: lists })))
+      )
+    })
+  ));
+  getUserFromCache$ = createEffect(() => this.actions$.pipe(
+    ofType(UsersActions.GetUserFromCache),
+    mergeMap((action) => {
+      const url = this.api.buildUrl({ route: `${UsersRoutes.Main}/${UsersRoutes.Auth}` })
+      return this.api.post<User>(url, { token: action.payload }).pipe(
+        map((user) => UsersActions.UserAuthenticated({ payload: user }))
       )
     })
   ))

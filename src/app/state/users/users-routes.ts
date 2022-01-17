@@ -3,4 +3,5 @@ export enum UsersRoutes {
   Register = "register",
   Login = "login",
   GetLists = 'get-lists',
+  Auth = 'auth'
 }

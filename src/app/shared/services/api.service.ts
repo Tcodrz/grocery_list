@@ -1,5 +1,6 @@
+import { environment } from './../../../environments/environment';
 import { ApiResponse } from './../../core/models/api-response.interface';
-import { Observable, map } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -7,7 +8,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ApiService {
-  private readonly api = 'http://localhost:8000/api';
+  private readonly api = environment.apiURL;
   constructor(
     private http: HttpClient
   ) { }

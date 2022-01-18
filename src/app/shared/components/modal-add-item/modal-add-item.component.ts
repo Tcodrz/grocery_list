@@ -32,7 +32,8 @@ export class ModalAddItemComponent implements OnInit {
     const item: Item = {
       sName: this.form.value.sName,
       iAmount: this.form.value.iAmount,
-      sListID: this.state.lists[this.state.iCurrentList]._id
+      sListID: this.state.lists[this.state.iCurrentList]._id,
+      bChecked: false,
     }
     this.store.dispatch(ListsActions.AddItemToList({ payload: { listID: this.state.lists[this.state.iCurrentList]._id, item: item } }));
     this.close.emit();

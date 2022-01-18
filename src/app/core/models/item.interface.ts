@@ -3,4 +3,5 @@ export interface Item {
   sName: string;
   iAmount: number;
   sListID: string;
+  bChecked: boolean;
 }

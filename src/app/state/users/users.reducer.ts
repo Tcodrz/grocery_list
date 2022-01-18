@@ -16,6 +16,7 @@ export const initialUserState: UserState = {
 
 const _userReducer = createReducer(
   initialUserState,
+  on(UsersActions.GetUserFromCache, (state) => ({ ...state, bIsUser: true })),
   on(UsersActions.UserLoggedIn, (state, action) => ({
     ...state,
     user: action.payload,

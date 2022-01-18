@@ -62,7 +62,25 @@ const _listsReducer = createReducer(
       lists: state.lists.map(list => list._id === action.payload._id ? action.payload : list)
     };
   }),
-  on(ListsActions.Reset, () => initialState)
+  on(ListsActions.Reset, () => initialState),
+  on(ListsActions.ItemsAddedToList, (state, action) => {
+    return {
+      ...state,
+      lists: state.lists.map(list => list._id === action.payload._id ? action.payload : list)
+    }
+  }),
+  on(ListsActions.ItemsUnChecked, (state, action) => {
+    return {
+      ...state,
+      lists: state.lists.map(list => list._id === action.payload._id ? action.payload : list)
+    };
+  }),
+  on(ListsActions.ItemsChecked, (state, action) => {
+    return {
+      ...state,
+      lists: state.lists.map(list => list._id === action.payload._id ? action.payload : list)
+    }
+  }),
 );
 
 export function listsReducer(state = initialState, action: Action): ListsState {

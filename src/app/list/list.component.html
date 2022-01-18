@@ -1,7 +1,7 @@
 <p-listbox [options]="items" [(ngModel)]="selectedItems" optionLabel="sName" [multiple]="true" [filter]="true"
   (ngModelChange)="onSelect()">
   <ng-template let-item pTemplate="header">
-    <h2 class="text-right">רשימת {{ list.sName }}</h2>
+    <h2 class="text-right">רשימת {{ list?.sName }}</h2>
     <div>
       <button *ngIf="bShowTrash" (click)="removeItems()" pButton type="button" class="p-button-rounded p-button-danger"
         icon="pi pi-trash"></button>
@@ -17,3 +17,5 @@
     <div *ngIf="items.length > 0">{{item.iAmount}}</div>
   </ng-template>
 </p-listbox>
+
+<gl-spinner></gl-spinner>

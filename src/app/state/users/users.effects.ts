@@ -22,10 +22,7 @@ export class UsersEffects {
             this.cacheService.cache(AppCacheKeys.User, res.token);
             return res.user;
           }),
-          map(user => {
-            return UsersActions.UserLoggedIn({ payload: user })
-          })
-        )
+          map(user => (UsersActions.UserLoggedIn({ payload: user }))))
     })
   ));
 
@@ -36,32 +33,29 @@ export class UsersEffects {
       return this.api.post<{ token: string; user: User }>(url, action.payload).pipe(
         map(res => {
           this.cacheService.cache(AppCacheKeys.User, res.token);
+          ListsActions.Load({ sUserID: res.user._id });
           return res.user;
         }),
-        map(user => {
-          return UsersActions.UserLoggedIn({ payload: user });
-        })
-      )
-    })
-  ));
+        map(user => (UsersActions.UserLoggedIn({ payload: user }))))
+    })));
   getLists$ = createEffect(() => this.actions$.pipe(
     ofType(UsersActions.GetUsersLists),
     mergeMap((action) => {
       const url = this.api.buildUrl({ route: `${UsersRoutes.Main}/${UsersRoutes.GetLists}` });
       return this.api.post<List[]>(url, action.payload).pipe(
-        map((lists) => (ListsActions.AddLists({ payload: lists })))
-      )
-    })
-  ));
+        map((lists) => (ListsActions.AddLists({ payload: lists }))))
+    })));
   getUserFromCache$ = createEffect(() => this.actions$.pipe(
     ofType(UsersActions.GetUserFromCache),
     mergeMap((action) => {
       const url = this.api.buildUrl({ route: `${UsersRoutes.Main}/${UsersRoutes.Auth}` })
       return this.api.post<User>(url, { token: action.payload }).pipe(
-        map((user) => UsersActions.UserAuthenticated({ payload: user }))
-      )
-    })
-  ))
+        map((user) => (UsersActions.UserLoggedIn({ payload: user }))))
+    })));
+  userLoggedIn$ = createEffect(() => this.actions$.pipe(
+    ofType(UsersActions.UserLoggedIn),
+    map((action) => (ListsActions.Load({ sUserID: action.payload._id })))
+  ));
 
   constructor(
     private actions$: Actions,

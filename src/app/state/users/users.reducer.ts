@@ -19,14 +19,8 @@ const _userReducer = createReducer(
   on(UsersActions.UserLoggedIn, (state, action) => ({
     ...state,
     user: action.payload,
-    bIsLoggedIn: true
-  })
-  ),
-  on(UsersActions.UserAuthenticated, (state, action) => ({
-    ...state,
-    user: action.payload,
     bIsLoggedIn: true,
-    bIsUser: true
+    bIsUser: true,
   })),
   on(UsersActions.Logout, (state) => ({ ...state, bIsLoggedIn: false })),
   on(UsersActions.UpdateUser, (state, action) => ({

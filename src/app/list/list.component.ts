@@ -32,7 +32,7 @@ export class ListComponent implements OnInit {
   private init(): void {
     this.store.select('listState').subscribe(listState => {
       this.list = listState.lists[listState.iCurrentList];
-      this.items = this.list.items;
+      this.items = this.list?.items;
       this.iCurrentIndex = listState.iCurrentList;
     });
   }

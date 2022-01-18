@@ -14,7 +14,7 @@ import { ModalGenericService } from './../shared/services/modal-generic.service'
 })
 export class AdminComponent implements OnInit {
   user: User;
-  usersLists: List[] = [];
+  usersLists: List[];
   iActiveList: number;
   constructor(
     private activeRoutes: ActivatedRoute,
@@ -24,10 +24,6 @@ export class AdminComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.activeRoutes.params.subscribe(({ sUserID }) => {
-      this.store.dispatch(ListsActions.Load({ sUserID: sUserID }));
-    });
-
     this.store.subscribe(({ listState, userState }) => {
       this.user = userState.user;
       this.usersLists = listState.lists;

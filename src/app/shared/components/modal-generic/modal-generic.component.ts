@@ -18,5 +18,4 @@ export class ModalGenericComponent implements OnInit {
   onHide() {
     this.modalService.afterClose();
   }
-
 }

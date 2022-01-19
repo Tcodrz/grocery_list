@@ -74,6 +74,15 @@ export class ListsEffects {
         map(list => (ListsActions.ItemsChecked({ payload: list })))
       )
     })
+  ));
+  deleteList$ = createEffect(() => this.actions$.pipe(
+    ofType(ListsActions.DeleteList),
+    mergeMap((action) => {
+      const url = this.api.buildUrl({ route: `${ApiListRoutes.Main}/${ApiListRoutes.DeleteList}` });
+      return this.api.post<any>(url, action.payload).pipe(
+        map(() => (ListsActions.ListDeleted()))
+      )
+    })
   ))
   constructor(
     private actions$: Actions,

@@ -8,8 +8,8 @@
         icon="pi pi-check"></button>
       <button *ngIf="bShowUnCheck" (click)="onItemsUnCheck()" pButton type="button"
         class="p-button-text p-button-rounded" icon="pi pi-undo"></button>
-      <button *ngIf="bShowAdd" pButton type="button" class="p-button-rounded p-button-secondary mr-1" icon="pi pi-plus"
-        (click)="onAddItem()"></button>
+      <button *ngIf="bShowAdd" pButton type="button" class="p-button-text p-button-rounded p-button-secondary mr-1"
+        icon="pi pi-plus" (click)="onAddItem()"></button>
     </div>
   </ng-template>
   <ng-template let-item pTemplate="item">

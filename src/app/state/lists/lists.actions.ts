@@ -18,3 +18,5 @@ export const MarkItemsChecked = createAction('[LISTS] MARK ITEMS CHECKED', props
 export const ItemsChecked = createAction('[LISTS] ITEMS CHECKED', props<{ payload: List }>());
 export const ItemsUnCheck = createAction('[LISTS] ITEMS UNCHECK', props<{ sListID: string; items: Item[] }>());
 export const ItemsUnChecked = createAction('[LISTS] ITEMS UNCHECKED', props<{ payload: List }>());
+export const DeleteList = createAction('[LISTS] DELETE LIST', props<{ payload: List }>());
+export const ListDeleted = createAction('[LISTS] DELETED');

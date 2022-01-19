@@ -8,13 +8,17 @@ export interface Modal {
 export type ModalParams = {
   sComponent?: string;
   sTitle?: string;
+  sMessage?: string;
+  sIcon?: string;
+  cb?: Function;
+
 };
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModalGenericService {
-  private _modal$: BehaviorSubject<Modal> = new BehaviorSubject<Modal>({open: false, params: {}});
+  private _modal$: BehaviorSubject<Modal> = new BehaviorSubject<Modal>({ open: false, params: {} });
   private close$: Subject<void> = new Subject();
   constructor() { }
   get modal(): Observable<Modal> {

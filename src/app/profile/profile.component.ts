@@ -1,3 +1,5 @@
+import { ModalGenericService } from './../shared/services/modal-generic.service';
+import * as ListsActions from 'src/app/state/lists/lists.actions';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import * as UsersActions from './../state/users/users.actions';
 import { Group } from './../core/models/group.interface';
@@ -23,6 +25,7 @@ export class ProfileComponent implements OnInit {
   constructor(
     private store: Store<AppState>,
     private fb: FormBuilder,
+    private modalService: ModalGenericService,
   ) { }
 
   ngOnInit(): void {
@@ -43,16 +46,25 @@ export class ProfileComponent implements OnInit {
     this.store.dispatch(UsersActions.UpdateUser({ payload: this.userDetails.value }));
   }
   onSelectList(): void {
-    // console.log(this.selectedList);
     this.bShowListEdit = !!this.selectedList;
     this.bShowTrashList = !!this.selectedList;
-    // if (this.selectedList) {
-    // }
   }
   onEditList(): void {
     console.log(this.selectedList);
   }
   onDeleteList(): void {
-    console.log(this.selectedList);
+    if (this.selectedList.items.length > 0) {
+      this.modalService.open({
+        sComponent: 'confirm',
+        sTitle: 'אישור מחיקה',
+        sMessage: 'רשימה זו מכילה פריטים, למחוק?',
+        sIcon: 'pi pi-exclamation-triangle',
+        cb: (confirm) => {
+          if (confirm) { this.store.dispatch(ListsActions.DeleteList({ payload: this.selectedList })); }
+        }
+      })
+    } else {
+      this.store.dispatch(ListsActions.DeleteList({ payload: this.selectedList }));
+    }
   }
 }

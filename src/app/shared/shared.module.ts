@@ -10,6 +10,7 @@ import { ModalGenericComponent } from './components/modal-generic/modal-generic.
 import { TopnavComponent } from './components/topnav/topnav.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import player from 'lottie-web';
+import { ModalConfirmComponent } from './components/modal-confirm/modal-confirm.component';
 
 
 export function playerFactory() {
@@ -21,7 +22,8 @@ export function playerFactory() {
     ModalAddItemComponent,
     TopnavComponent,
     ModalAddListComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    ModalConfirmComponent
   ],
   imports: [
     CommonModule,

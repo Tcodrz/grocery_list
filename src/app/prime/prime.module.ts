@@ -5,7 +5,7 @@ import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { MenubarModule } from 'primeng/menubar';
 import { CardModule } from 'primeng/card';
-
+import { FocusTrapModule } from 'primeng/focustrap';
 
 @NgModule({
   declarations: [],
@@ -16,6 +16,7 @@ import { CardModule } from 'primeng/card';
     InputTextModule,
     MenubarModule,
     CardModule,
+    FocusTrapModule,
   ],
   exports: [
     ListboxModule,
@@ -24,6 +25,7 @@ import { CardModule } from 'primeng/card';
     InputTextModule,
     MenubarModule,
     CardModule,
+    FocusTrapModule,
   ]
 })
 export class PrimeModule { }

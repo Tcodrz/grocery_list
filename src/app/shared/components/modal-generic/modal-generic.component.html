@@ -1,4 +1,14 @@
-<p-dialog header="{{ (modal$ | async).params.sTitle }}" [(visible)]="bShow" (onHide)="onHide()">
-  <gl-modal-add-item *ngIf="(modal$ | async).params.sComponent === 'add-item'" (close)="onHide()"></gl-modal-add-item>
-  <gl-modal-add-list *ngIf="(modal$ | async).params.sComponent === 'add-list'" (close)="onHide()"></gl-modal-add-list>
-</p-dialog>
+<div pFocusTrap>
+  <p-dialog [(visible)]="bShow" (onHide)="onHide()">
+    <ng-template pTemplate="header">
+      <div>
+        <i *ngIf="(modal$ | async).params.sIcon" [class]="(modal$ | async).params.sIcon"></i>
+        {{ (modal$ | async).params.sTitle }}
+      </div>
+    </ng-template>
+    <gl-modal-add-item *ngIf="(modal$ | async).params.sComponent === 'add-item'" (close)="onHide()"></gl-modal-add-item>
+    <gl-modal-add-list *ngIf="(modal$ | async).params.sComponent === 'add-list'" (close)="onHide()"></gl-modal-add-list>
+    <gl-modal-confirm *ngIf="(modal$ | async).params.sComponent === 'confirm'" [params]="(modal$ | async).params"
+      (close)="onHide()"></gl-modal-confirm>
+  </p-dialog>
+</div>

@@ -54,7 +54,6 @@ export class ListComponent implements OnInit {
     this.selectedItems = [];
   }
   onItemsUnCheck(): void {
-    // console.log(this.selectedItems);
     this.store.dispatch(ListsActions.ItemsUnCheck({ sListID: this.list._id, items: this.selectedItems }));
     this.selectedItems = [];
   }

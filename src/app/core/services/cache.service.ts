@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 
 export enum AppCacheKeys {
-  User = 'gl-user_token'
+  User = 'gl-user',
+  Token = 'gl-user_token',
+  iActiveList = 'gl_iActiveList'
 }
 
 @Injectable({

@@ -1,3 +1,4 @@
+import { LoginModule } from './login/login.module';
 import { SpinnerInterceptor } from './core/interceptors/spinner.interceptor';
 import { StateModule } from './state/state.module';
 import { SharedModule } from './shared/shared.module';
@@ -20,6 +21,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    LoginModule,
     SharedModule,
     ListModule,
     StateModule,

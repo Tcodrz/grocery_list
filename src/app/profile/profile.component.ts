@@ -57,7 +57,7 @@ export class ProfileComponent implements OnInit {
       this.modalService.open({
         sComponent: 'confirm',
         sTitle: 'אישור מחיקה',
-        sMessage: 'רשימה זו מכילה פריטים, למחוק?',
+        sMessage: 'רשימה זו אינה ריקה, למחוק?',
         sIcon: 'pi pi-exclamation-triangle',
         cb: (confirm) => {
           if (confirm) { this.store.dispatch(ListsActions.DeleteList({ payload: this.selectedList })); }

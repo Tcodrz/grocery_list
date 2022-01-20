@@ -6,6 +6,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { MenubarModule } from 'primeng/menubar';
 import { CardModule } from 'primeng/card';
 import { FocusTrapModule } from 'primeng/focustrap';
+import { TabViewModule } from 'primeng/tabview';
+import { AccordionModule } from 'primeng/accordion';
 
 @NgModule({
   declarations: [],
@@ -17,6 +19,8 @@ import { FocusTrapModule } from 'primeng/focustrap';
     MenubarModule,
     CardModule,
     FocusTrapModule,
+    TabViewModule,
+    AccordionModule,
   ],
   exports: [
     ListboxModule,
@@ -26,6 +30,8 @@ import { FocusTrapModule } from 'primeng/focustrap';
     MenubarModule,
     CardModule,
     FocusTrapModule,
+    TabViewModule,
+    AccordionModule,
   ]
 })
 export class PrimeModule { }

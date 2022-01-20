@@ -19,7 +19,8 @@ export class UsersEffects {
       return this.api.post<{ token: string; user: User }>(url, action.payload)
         .pipe(
           map(res => {
-            this.cacheService.cache(AppCacheKeys.User, res.token);
+            this.cacheService.cache(AppCacheKeys.Token, res.token);
+            this.cacheService.cache(AppCacheKeys.User, res.user);
             return res.user;
           }),
           map(user => (UsersActions.UserLoggedIn({ payload: user }))))
@@ -32,7 +33,8 @@ export class UsersEffects {
       const url = this.api.buildUrl({ route: `${UsersRoutes.Main}/${UsersRoutes.Login}` });
       return this.api.post<{ token: string; user: User }>(url, action.payload).pipe(
         map(res => {
-          this.cacheService.cache(AppCacheKeys.User, res.token);
+          this.cacheService.cache(AppCacheKeys.Token, res.token);
+          this.cacheService.cache(AppCacheKeys.User, res.user);
           ListsActions.Load({ sUserID: res.user._id });
           return res.user;
         }),

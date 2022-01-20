@@ -17,6 +17,9 @@ import { ProfileComponent } from './profile.component';
     FormsModule,
     ReactiveFormsModule,
     PrimeModule,
+  ],
+  exports: [
+    ProfileComponent,
   ]
 })
 export class ProfileModule { }

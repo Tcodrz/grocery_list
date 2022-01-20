@@ -1,11 +1,8 @@
-import { User } from './../core/models/user.interface';
-import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AppState } from '../state';
-import * as UsersActions from '../state/users/users.actions'
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { User } from './../core/models/user.interface';
+import { LoginService } from './../core/services/login.service';
 
 enum LinkText {
   Register = 'יש לי חשבון',
@@ -23,44 +20,37 @@ export class LoginComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   user: User;
   sTitle: string;
-  sLinkText: string;
   constructor(
     private fb: FormBuilder,
-    private store: Store<AppState>,
-    private router: Router,
+    private loginService: LoginService,
   ) { }
   get title(): string { return this.bShowRegister ? 'הרשמה' : 'כניסה' }
+  get linkText(): string { return this.bShowRegister ? 'יש לי חשבון' : 'אני רוצה להירשם'; }
   ngOnInit(): void {
-    this.subscription = this.store.select('userState').subscribe(state => {
-      if (state.bIsLoggedIn) this.router.navigate(['admin', { sUserID: state.user._id }]);
-      this.bShowRegister = !state.bIsUser;
-      if (!this.bShowRegister) {
-        this.user = state.user;
-        this.sLinkText = LinkText.Login;
-      } else {
-        this.sLinkText = LinkText.Register;
-      }
-      this.initForm();
-    });
-  }
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-  private initForm(): void {
     this.loginForm = this.fb.group({
-      sFirstName: this.bShowRegister ? null : ['', null],
-      sLastName: this.bShowRegister ? null : ['', null],
-      sEmail: [!this.bShowRegister ? this.user.sEmail : '', null],
+      sFirstName: ['', null],
+      sLastName: ['', null],
+      sEmail: ['', null],
       sPassword: ['', null]
     });
+
+    this.loginService.isUser().subscribe(bIsUser => {
+      this.bShowRegister = !bIsUser;
+    });
+    this.loginService.getUser().subscribe(user => {
+      if (user) {
+        this.user = user;
+        this.loginForm.patchValue({ sEmail: user.sEmail });
+      }
+    });
   }
+  ngOnDestroy(): void { }
   onSubmit(): void {
-    if (this.bShowRegister) this.store.dispatch(UsersActions.Register({ payload: this.loginForm.value }));
-    else this.store.dispatch(UsersActions.Login({ payload: this.loginForm.value }));
+    this.loginService.onLogin(this.loginForm.value, this.bShowRegister);
   }
   toggleRegistered(): void {
     this.bShowRegister = !this.bShowRegister;
-    this.sLinkText = this.bShowRegister ? 'יש לי חשבון' : 'אני רוצה להירשם';
     if (this.bShowRegister) this.loginForm.patchValue({ sEmail: '' });
+    else if (!!this.user && this.user.sEmail) this.loginForm.patchValue({ sEmail: this.user.sEmail });
   }
 }

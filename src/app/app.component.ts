@@ -20,8 +20,8 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     const bIsUser = this.cache.isItem(AppCacheKeys.User);
     if (bIsUser) {
-      const token = this.cache.getItem<string>(AppCacheKeys.User);
-      this.store.dispatch(UsersActions.GetUserFromCache({ payload: token }));
+      const user = this.cache.getItem<User>(AppCacheKeys.User);
+      this.store.dispatch(UsersActions.UserLoggedIn({ payload: user }));
     }
     this.bIsUserLoggedIn$ = this.store.select('userState').pipe(map(userState => userState.bIsLoggedIn));
 

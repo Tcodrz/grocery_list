@@ -1,13 +1,26 @@
-<ng-container *ngIf="usersLists?.length < 1">
-  <p-card class="mt-3">
-    <h1>שלום {{ user?.sFirstName }}</h1>
-    <p>נראה שאין לך עדיין רשימות, לחץ
-      <span class="link" (click)="onAddList()">כאן</span> כדי להוסיף רשימה
-    </p>
-  </p-card>
-</ng-container>
-<ng-container *ngIf="usersLists.length > 1">
-  <router-outlet></router-outlet>
-</ng-container>
-
-<gl-spinner></gl-spinner>
+<p-tabView [(activeIndex)]="iTabIndex">
+  <p-tabPanel>
+    <ng-template pTemplate="header"><i class="pi pi-list"></i></ng-template>
+    <ng-template pTemplate="content">
+      <gl-lists [user]="user" [lists]="usersLists"></gl-lists>
+    </ng-template>
+  </p-tabPanel>
+  <p-tabPanel>
+    <ng-template pTemplate="header"><i class="pi pi-share-alt"></i></ng-template>
+    <ng-template pTemplate="content">
+      Complex Content to Lazy Load
+    </ng-template>
+  </p-tabPanel>
+  <p-tabPanel>
+    <ng-template pTemplate="header"><i class="pi pi-unlock"></i></ng-template>
+    <ng-template pTemplate=" content">
+      Complex Content to Lazy Load
+    </ng-template>
+  </p-tabPanel>
+  <p-tabPanel>
+    <ng-template pTemplate="header"><i class="pi pi-user"></i></ng-template>
+    <ng-template pTemplate=" content">
+      <gl-profile></gl-profile>
+    </ng-template>
+  </p-tabPanel>
+</p-tabView>

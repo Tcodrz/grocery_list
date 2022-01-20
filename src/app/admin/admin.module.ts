@@ -1,3 +1,5 @@
+import { ProfileModule } from './../profile/profile.module';
+import { ListModule } from './../list/list.module';
 import { PrimeModule } from './../prime/prime.module';
 import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
@@ -14,6 +16,8 @@ import { AdminComponent } from './admin.component';
   imports: [
     CommonModule,
     AdminRoutingModule,
+    ListModule,
+    ProfileModule,
     SharedModule,
     PrimeModule
   ]

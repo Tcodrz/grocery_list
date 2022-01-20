@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModalGenericComponent implements OnInit {
   modal$: Observable<Modal>;
-  bShow: boolean;
+  bShow: boolean = false;
   constructor(private modalService: ModalGenericService) { }
 
   ngOnInit(): void {

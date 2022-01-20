@@ -15,7 +15,9 @@ import { ModalGenericService } from './../shared/services/modal-generic.service'
 export class AdminComponent implements OnInit {
   user: User;
   usersLists: List[];
+  bIsLoading = true;
   iActiveList: number;
+  iTabIndex: number;
   constructor(
     private activeRoutes: ActivatedRoute,
     private router: Router,
@@ -28,7 +30,7 @@ export class AdminComponent implements OnInit {
       this.user = userState.user;
       this.usersLists = listState.lists;
       this.iActiveList = listState.iCurrentList;
-      if (this.usersLists.length > 0) this.router.navigate(['admin/lists']);
+      this.bIsLoading = false;
     });
   }
   onAddList(): void {

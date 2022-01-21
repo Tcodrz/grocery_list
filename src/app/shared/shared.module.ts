@@ -1,3 +1,4 @@
+import { UnitTypesPipe } from './../core/pipes/unit-types.pipe';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -26,6 +27,7 @@ export function playerFactory() {
     ModalItemEditComponent,
     SpinnerComponent,
     TopnavComponent,
+    UnitTypesPipe,
   ],
   imports: [
     CommonModule,
@@ -39,6 +41,7 @@ export function playerFactory() {
     ModalGenericComponent,
     SpinnerComponent,
     TopnavComponent,
+    UnitTypesPipe,
   ]
 })
 export class SharedModule { }

@@ -19,6 +19,8 @@
       <div>{{group}}</div>
     </ng-template>
     <div *ngIf="items.length > 0" [ngClass]="item.bChecked ? 'checked' : 'unchecked'">{{item.sName}}</div>
-    <div *ngIf="items.length > 0" [ngClass]="item.bChecked ? 'checked' : 'unchecked'">{{item.iAmount}}</div>
+    <div *ngIf="items.length > 0" [ngClass]="item.bChecked ? 'checked' : 'unchecked'">{{item.iAmount }}
+      <ng-container *ngIf="item.sUnit"> {{ item.sUnit | unitTypes }} </ng-container>
+    </div>
   </ng-template>
 </p-listbox>

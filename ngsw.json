@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1642626191291,
+  "timestamp": 1642724811762,
   "index": "https://Tcodrz.github.io/grocery_list/index.html",
   "assetGroups": [
     {
@@ -11,16 +11,14 @@
         "ignoreVary": true
       },
       "urls": [
-        "https://Tcodrz.github.io/grocery_list/58.7b239880de48dee3.js",
-        "https://Tcodrz.github.io/grocery_list/620.3f43321f4ac59f95.js",
-        "https://Tcodrz.github.io/grocery_list/823.967165c950a72fa3.js",
+        "https://Tcodrz.github.io/grocery_list/675.5d627392e298ba89.js",
         "https://Tcodrz.github.io/grocery_list/favicon.ico",
         "https://Tcodrz.github.io/grocery_list/index.html",
-        "https://Tcodrz.github.io/grocery_list/main.95e98d21299b0c07.js",
+        "https://Tcodrz.github.io/grocery_list/main.7e5d1b620e6f50e0.js",
         "https://Tcodrz.github.io/grocery_list/manifest.webmanifest",
         "https://Tcodrz.github.io/grocery_list/polyfills.3715f7d29f9322a1.js",
-        "https://Tcodrz.github.io/grocery_list/runtime.7b5217cba95143ce.js",
-        "https://Tcodrz.github.io/grocery_list/styles.4715a8f11df05966.css"
+        "https://Tcodrz.github.io/grocery_list/runtime.f3f7832401afd73c.js",
+        "https://Tcodrz.github.io/grocery_list/styles.67180c524bd51a6c.css"
       ],
       "patterns": []
     },
@@ -63,9 +61,7 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "https://Tcodrz.github.io/grocery_list/58.7b239880de48dee3.js": "fd52ea63ea41ef893c7700baf6c1083f522f0cdc",
-    "https://Tcodrz.github.io/grocery_list/620.3f43321f4ac59f95.js": "8eb51bddda87711633dcf3b44f57032728334cab",
-    "https://Tcodrz.github.io/grocery_list/823.967165c950a72fa3.js": "ef4ffe9a340896f4a3d6885f0e5b1c16ab3bad9c",
+    "https://Tcodrz.github.io/grocery_list/675.5d627392e298ba89.js": "91333bf4edef55d8dec527181e9c718ad4b822bc",
     "https://Tcodrz.github.io/grocery_list/Inter-Bold.579e0f95cacfae57.woff2": "1e94a0dfac8bab0947ea9b0b6fb663ebad5cceb5",
     "https://Tcodrz.github.io/grocery_list/Inter-Bold.b1234477a53679d3.woff": "e5a49e5a28119e960539a6de0bf8f72b810362af",
     "https://Tcodrz.github.io/grocery_list/Inter-Light.27083fa6375bb9ef.woff2": "0a0ce8dc92ba6f20af57eeb341e160375f971268",
@@ -89,15 +85,15 @@
     "https://Tcodrz.github.io/grocery_list/color.dae87a04d07ca92b.png": "ff4c4bcb2207891b292f544edb4da9d2df5d45cf",
     "https://Tcodrz.github.io/grocery_list/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
     "https://Tcodrz.github.io/grocery_list/hue.8b1818380241e6ac.png": "f81ae627637a684614aa726e206c73ce099a01fd",
-    "https://Tcodrz.github.io/grocery_list/index.html": "6e1ba6768c36639eab9377d4a4f3bca8313eb70b",
-    "https://Tcodrz.github.io/grocery_list/main.95e98d21299b0c07.js": "56b8eecdf1b7933b803ef97601ab1800960b39ee",
+    "https://Tcodrz.github.io/grocery_list/index.html": "111380af70b49078a995cc3a1b943448f5c81d6f",
+    "https://Tcodrz.github.io/grocery_list/main.7e5d1b620e6f50e0.js": "a80c74c77841cd7ae5efbce2c921930fe6c0b984",
     "https://Tcodrz.github.io/grocery_list/manifest.webmanifest": "a4e2cab399ed99b710305dd893bb41d72238c790",
     "https://Tcodrz.github.io/grocery_list/polyfills.3715f7d29f9322a1.js": "bb04ae2f95b01b341ba4168788f55fdc8b65e8da",
     "https://Tcodrz.github.io/grocery_list/primeicons.29151a741d66863a.woff": "21e477ea19e15b66344bcc23b3fbb2161092a707",
     "https://Tcodrz.github.io/grocery_list/primeicons.5f5d08cd089b4e5d.ttf": "e6c86ca90a9fb4282fb35523d56fde00e78a1416",
     "https://Tcodrz.github.io/grocery_list/primeicons.76044b1c189cc4d7.svg": "621775b2ec555fd2dd152a24390cf6dfeee168b1",
-    "https://Tcodrz.github.io/grocery_list/runtime.7b5217cba95143ce.js": "7b35ff8c12031d901f18c2199f4da7bf3233f230",
-    "https://Tcodrz.github.io/grocery_list/styles.4715a8f11df05966.css": "394e4219d7c4edbb6de00fc14dd9983cedfa3f59"
+    "https://Tcodrz.github.io/grocery_list/runtime.f3f7832401afd73c.js": "b988707a7eb3b7b1563a7356ca77ee0ab94eeef3",
+    "https://Tcodrz.github.io/grocery_list/styles.67180c524bd51a6c.css": "3621860a4c4eb375f37277d6ec7849bc195a6e04"
   },
   "navigationUrls": [
     {

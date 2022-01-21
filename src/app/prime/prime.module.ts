@@ -1,37 +1,44 @@
-import { NgModule } from '@angular/core';
-import { ListboxModule } from 'primeng/listbox';
-import { ButtonModule } from 'primeng/button';
-import { DialogModule } from 'primeng/dialog';
-import { InputTextModule } from 'primeng/inputtext';
-import { MenubarModule } from 'primeng/menubar';
-import { CardModule } from 'primeng/card';
-import { FocusTrapModule } from 'primeng/focustrap';
-import { TabViewModule } from 'primeng/tabview';
 import { AccordionModule } from 'primeng/accordion';
+import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
+import { DialogModule } from 'primeng/dialog';
+import { DropdownModule } from 'primeng/dropdown';
+import { FocusTrapModule } from 'primeng/focustrap';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { InputTextModule } from 'primeng/inputtext';
+import { ListboxModule } from 'primeng/listbox';
+import { MenubarModule } from 'primeng/menubar';
+import { NgModule } from '@angular/core';
+import { TabViewModule } from 'primeng/tabview';
+
 
 @NgModule({
   declarations: [],
   imports: [
-    ListboxModule,
-    ButtonModule,
-    DialogModule,
-    InputTextModule,
-    MenubarModule,
-    CardModule,
-    FocusTrapModule,
-    TabViewModule,
     AccordionModule,
+    ButtonModule,
+    CardModule,
+    DialogModule,
+    DropdownModule,
+    FocusTrapModule,
+    InputTextareaModule,
+    InputTextModule,
+    ListboxModule,
+    MenubarModule,
+    TabViewModule,
   ],
   exports: [
-    ListboxModule,
-    ButtonModule,
-    DialogModule,
-    InputTextModule,
-    MenubarModule,
-    CardModule,
-    FocusTrapModule,
-    TabViewModule,
     AccordionModule,
+    ButtonModule,
+    CardModule,
+    DialogModule,
+    DropdownModule,
+    FocusTrapModule,
+    InputTextareaModule,
+    InputTextModule,
+    ListboxModule,
+    MenubarModule,
+    TabViewModule,
   ]
 })
 export class PrimeModule { }

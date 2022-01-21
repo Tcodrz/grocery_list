@@ -1,16 +1,17 @@
-import { LottieModule } from 'ngx-lottie';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PrimeModule } from './../prime/prime.module';
+import { HttpClientModule } from '@angular/common/http';
+import { LottieModule } from 'ngx-lottie';
 import { ModalAddItemComponent } from './components/modal-add-item/modal-add-item.component';
 import { ModalAddListComponent } from './components/modal-add-list/modal-add-list.component';
-import { ModalGenericComponent } from './components/modal-generic/modal-generic.component';
-import { TopnavComponent } from './components/topnav/topnav.component';
-import { SpinnerComponent } from './components/spinner/spinner.component';
-import player from 'lottie-web';
 import { ModalConfirmComponent } from './components/modal-confirm/modal-confirm.component';
+import { ModalGenericComponent } from './components/modal-generic/modal-generic.component';
+import { ModalItemEditComponent } from './components/modal-item-edit/modal-item-edit.component';
+import { NgModule } from '@angular/core';
+import { PrimeModule } from './../prime/prime.module';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { TopnavComponent } from './components/topnav/topnav.component';
+import player from 'lottie-web';
 
 
 export function playerFactory() {
@@ -18,25 +19,26 @@ export function playerFactory() {
 }
 @NgModule({
   declarations: [
-    ModalGenericComponent,
     ModalAddItemComponent,
-    TopnavComponent,
     ModalAddListComponent,
+    ModalConfirmComponent,
+    ModalGenericComponent,
+    ModalItemEditComponent,
     SpinnerComponent,
-    ModalConfirmComponent
+    TopnavComponent,
   ],
   imports: [
     CommonModule,
-    PrimeModule,
     FormsModule,
-    ReactiveFormsModule,
+    HttpClientModule,
     LottieModule.forRoot({ player: playerFactory }),
-    HttpClientModule
+    PrimeModule,
+    ReactiveFormsModule,
   ],
   exports: [
     ModalGenericComponent,
-    TopnavComponent,
     SpinnerComponent,
+    TopnavComponent,
   ]
 })
 export class SharedModule { }

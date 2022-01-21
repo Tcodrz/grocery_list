@@ -11,7 +11,7 @@ export type ModalParams = {
   sMessage?: string;
   sIcon?: string;
   cb?: Function;
-
+  inputs?: any;
 };
 
 @Injectable({

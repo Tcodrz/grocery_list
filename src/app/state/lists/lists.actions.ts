@@ -20,3 +20,5 @@ export const ItemsUnCheck = createAction('[LISTS] ITEMS UNCHECK', props<{ sListI
 export const ItemsUnChecked = createAction('[LISTS] ITEMS UNCHECKED', props<{ payload: List }>());
 export const DeleteList = createAction('[LISTS] DELETE LIST', props<{ payload: List }>());
 export const ListDeleted = createAction('[LISTS] DELETED');
+export const UpdateItem = createAction('[LISTS] UPDATE ITEM', props<{ sListID: string; item: Item }>());
+export const ItemUpdated = createAction('[LSITS] ITEM UPDATED', props<{ payload: List }>());

@@ -30,6 +30,7 @@ export class ListboxComponent implements OnInit {
   get bShowCheck(): boolean { return this.aSelectedItems.length > 0 && this.aSelectedItems.every(item => !item.bChecked); }
   get bShowTrash(): boolean { return this.aSelectedItems.length > 0 }
   get bShowUnCheck(): boolean { return this.aSelectedItems.length > 0 && this.aSelectedItems.every(item => item.bChecked); }
+  get bShowItemEdit(): boolean { return this.aSelectedItems.length === 1; }
   removeItems(): void {
     this.aSelectedItems.forEach(item => this.store.dispatch(ListsActions.RemoveItemsFromList({ payload: { listID: this.list._id, items: this.aSelectedItems } })));
     this.aSelectedItems = [];
@@ -47,5 +48,16 @@ export class ListboxComponent implements OnInit {
   onItemsUnCheck(): void {
     this.store.dispatch(ListsActions.ItemsUnCheck({ sListID: this.list._id, items: this.aSelectedItems }));
     this.aSelectedItems = [];
+  }
+  onItemEdit(): void {
+    this.modalService.open({
+      sComponent: 'item-edit',
+      sTitle: this.aSelectedItems[0].sName,
+      cb: (item) => {
+        console.log(item);
+        this.store.dispatch(ListsActions.UpdateItem({ sListID: this.list._id, item: item }));
+      },
+      inputs: { item: this.aSelectedItems[0] }
+    })
   }
 }

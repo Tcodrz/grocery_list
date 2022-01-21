@@ -83,6 +83,15 @@ export class ListsEffects {
         map(() => (ListsActions.ListDeleted()))
       )
     })
+  ));
+  updateItem$ = createEffect(() => this.actions$.pipe(
+    ofType(ListsActions.UpdateItem),
+    mergeMap(({ sListID, item }) => {
+      const url = this.api.buildUrl({ route: `${ApiListRoutes.Main}/${ApiListRoutes.UpdateItem}` });
+      return this.api.post<List>(url, { sListID, item }).pipe(
+        map(list => (ListsActions.ItemUpdated({ payload: list })))
+      )
+    })
   ))
   constructor(
     private actions$: Actions,

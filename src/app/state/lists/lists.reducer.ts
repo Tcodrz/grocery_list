@@ -81,7 +81,8 @@ const _listsReducer = createReducer(
       lists: state.lists.map(list => list._id === action.payload._id ? action.payload : list)
     }
   }),
-  on(ListsActions.DeleteList, (state, action) => ({ ...state, lists: state.lists.filter(list => list._id !== action.payload._id) }))
+  on(ListsActions.DeleteList, (state, action) => ({ ...state, lists: state.lists.filter(list => list._id !== action.payload._id) })),
+  on(ListsActions.ItemUpdated, (state, action) => ({ ...state, lists: state.lists.map(list => list._id === action.payload._id ? action.payload : list) })),
 );
 
 export function listsReducer(state = initialState, action: Action): ListsState {

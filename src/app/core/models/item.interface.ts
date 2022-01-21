@@ -4,4 +4,6 @@ export interface Item {
   iAmount: number;
   sListID: string;
   bChecked: boolean;
+  sUnit?: string;
+  sComment?: string;
 }

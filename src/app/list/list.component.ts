@@ -38,5 +38,8 @@ export class ListComponent implements OnInit, OnChanges {
     this.iCurrentIndex = i;
     this.cache.cache(AppCacheKeys.iActiveList, this.iCurrentIndex);
   }
+  onAddList(): void {
+    this.modal.open({ sComponent: 'add-list', sTitle: 'הוספת רשימה' });
+  }
 
 }

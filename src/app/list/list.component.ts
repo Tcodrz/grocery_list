@@ -22,17 +22,17 @@ export class ListComponent implements OnInit, OnChanges {
     private cache: CacheService
   ) { }
   ngOnChanges(changes: SimpleChanges): void {
-    this.iCurrentIndex = this.cache.getItem(AppCacheKeys.iActiveList) || 0;
+    this.init();
   }
   ngOnInit(): void {
-    this.init();
     this.modal.closed().subscribe(() => {
       this.init();
     });
   }
   private init(): void {
+    this.iCurrentIndex = this.cache.getItem(AppCacheKeys.iActiveList) || 0;
     this.items = this.lists[this.iCurrentIndex].items;
-    this.bIsLoading = this.lists.length <= 0;;
+    this.bIsLoading = this.lists.length <= 0;
   }
   onChangeList(i: number) {
     this.iCurrentIndex = i;

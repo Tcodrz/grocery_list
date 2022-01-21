@@ -53,10 +53,7 @@ export class ListboxComponent implements OnInit {
     this.modalService.open({
       sComponent: 'item-edit',
       sTitle: this.aSelectedItems[0].sName,
-      cb: (item) => {
-        console.log(item);
-        this.store.dispatch(ListsActions.UpdateItem({ sListID: this.list._id, item: item }));
-      },
+      cb: (item: Item) => { this.store.dispatch(ListsActions.UpdateItem({ sListID: this.list._id, item: item })); },
       inputs: { item: this.aSelectedItems[0] }
     })
   }

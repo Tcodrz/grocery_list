@@ -10,7 +10,8 @@ export enum ApiListRoutes {
   AddList = 'add-list',
   Load = 'load',
   DeleteList = 'list-delete',
-  UpdateItem = 'item-update'
+  UpdateItem = 'item-update',
+  GetByID = 'list-by-id'
 }
 
 export enum ApiListItemRoutes {

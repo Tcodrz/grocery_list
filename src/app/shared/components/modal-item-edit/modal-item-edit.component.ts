@@ -1,3 +1,4 @@
+import { Units } from './../../../core/pipes/unit-types.pipe';
 import { VLPair } from './../../../core/models/types';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Item } from 'src/app/core/models/item.interface';
@@ -16,9 +17,9 @@ export class ModalItemEditComponent implements OnInit {
   form: FormGroup;
   aUnits: VLPair[] = [
     { value: '', label: '' },
-    { value: 'gram', label: 'גרם' },
-    { value: 'kilogram', label: 'קילו' },
-    { value: 'unit', label: 'יחידה' }
+    { value: Units.Gram, label: 'גרם' },
+    { value: Units.KiloGram, label: 'קילו' },
+    { value: Units.Unit, label: 'יחידה' }
   ];
   selectedUnit: VLPair;
   constructor(

@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { AppState } from '../state';
 import { Component, OnInit } from '@angular/core';
 import { List } from './../core/models/list.interface';
@@ -12,6 +13,7 @@ import { User } from './../core/models/user.interface';
 export class AdminComponent implements OnInit {
   user: User;
   usersLists: List[];
+  publicLists: List[];
   bIsLoading = true;
   iActiveList: number;
   iTabIndex: number;
@@ -22,7 +24,8 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
     this.store.subscribe(({ listState, userState }) => {
       this.user = userState.user;
-      this.usersLists = listState.lists;
+      this.usersLists = listState.lists.filter(list => !list.bIsPublic);
+      this.publicLists = listState.lists.filter(list => list.bIsPublic);
       this.iActiveList = listState.iCurrentList;
       this.bIsLoading = false;
     });

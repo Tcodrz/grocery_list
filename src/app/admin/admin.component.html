@@ -8,7 +8,7 @@
   <p-tabPanel>
     <ng-template pTemplate="header"><i class="pi pi-share-alt"></i></ng-template>
     <ng-template pTemplate="content">
-      Complex Content to Lazy Load
+      <gl-lists [user]="user" [lists]="publicLists"></gl-lists>
     </ng-template>
   </p-tabPanel>
   <p-tabPanel>

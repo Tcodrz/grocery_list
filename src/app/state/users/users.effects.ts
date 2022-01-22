@@ -11,7 +11,6 @@ import * as ListsActions from '../lists/lists.actions';
 
 @Injectable()
 export class UsersEffects {
-
   register$ = createEffect(() => this.actions$.pipe(
     ofType(UsersActions.Register),
     mergeMap((action) => {
@@ -26,7 +25,6 @@ export class UsersEffects {
           map(user => (UsersActions.UserLoggedIn({ payload: user }))))
     })
   ));
-
   login$ = createEffect(() => this.actions$.pipe(
     ofType(UsersActions.Login),
     mergeMap((action) => {
@@ -57,6 +55,15 @@ export class UsersEffects {
   userLoggedIn$ = createEffect(() => this.actions$.pipe(
     ofType(UsersActions.UserLoggedIn),
     map((action) => (ListsActions.Load({ sUserID: action.payload._id })))
+  ));
+  addPublicList$ = createEffect(() => this.actions$.pipe(
+    ofType(UsersActions.AddPulicList),
+    mergeMap((action) => {
+      const url = this.api.buildUrl({ route: `${UsersRoutes.Main}/${UsersRoutes.AddPublicList}` })
+      return this.api.post<User>(url, { sListID: action.sListID, sUserID: action.sUserID }).pipe(
+        map((user) => (ListsActions.Load({ sUserID: user._id })))
+      )
+    })
   ));
 
   constructor(

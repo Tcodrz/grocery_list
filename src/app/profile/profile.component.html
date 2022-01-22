@@ -1,16 +1,18 @@
 <p-card class="form-container">
   <h3 class="form-header">פרטים אישיים</h3>
   <form [formGroup]="userDetails" (ngSubmit)="onUpdateUserDetails()">
+    <div>
+      <span class="p-float-label d-inline-block w-50">
+        <input type="text" id="sFirstName" class="w-90" pInputText formControlName="sFirstName">
+        <label for="sFirstName">שם פרטי</label>
+      </span>
+      <span class="p-float-label d-inline-block w-50">
+        <input type="text" id="sLastName" class="w-90" pInputText formControlName="sLastName">
+        <label for="sLastName">שם משפחה</label>
+      </span>
+    </div>
     <span class="p-float-label">
-      <input type="text" id="sFirstName" pInputText formControlName="sFirstName">
-      <label for="sFirstName">שם פרטי</label>
-    </span>
-    <span class="p-float-label">
-      <input type="text" id="sLastName" pInputText formControlName="sLastName">
-      <label for="sLastName">שם משפחה</label>
-    </span>
-    <span class="p-float-label">
-      <input type="text" id="sEmail" pInputText formControlName="sEmail">
+      <input type="text" id="sEmail" class="w-100" pInputText formControlName="sEmail">
       <label for="sEmail">אימייל</label>
     </span>
     <div class="btn-container">

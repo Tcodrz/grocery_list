@@ -6,11 +6,13 @@ import * as Utils from '../utils';
 export interface ListsState {
   lists: List[];
   iCurrentList: number;
+  listInvite: List | null;
 }
 
 export const initialState: ListsState = {
   lists: [],
-  iCurrentList: -1
+  iCurrentList: -1,
+  listInvite: null
 };
 
 const _listsReducer = createReducer(
@@ -86,6 +88,7 @@ const _listsReducer = createReducer(
   }),
   on(ListsActions.DeleteList, (state, action) => ({ ...state, lists: state.lists.filter(list => list._id !== action.payload._id) })),
   on(ListsActions.ItemUpdated, (state, action) => ({ ...state, lists: state.lists.map(list => list._id === action.payload._id ? action.payload : list) })),
+  on(ListsActions.ListFetched, (state, action) => ({ ...state, listInvite: action.payload })),
 );
 
 export function listsReducer(state = initialState, action: Action): ListsState {

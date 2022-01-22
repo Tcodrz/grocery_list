@@ -6,5 +6,5 @@ export interface User {
   sPassword?: string;
   dCreated?: Date;
   aGroupIDs: string[];
-  aListIDs: string[];
+  aListsIDs: string[];
 }

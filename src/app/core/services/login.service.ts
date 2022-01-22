@@ -14,11 +14,11 @@ export class LoginService {
     private router: Router,
     private store: Store<AppState>,
   ) { }
-  onLogin(user: User, bRegister: boolean) {
+  onLogin(user: User, bRegister: boolean, sRoute: string) {
     if (bRegister) this.store.dispatch(UsersActions.Register({ payload: user }));
     else this.store.dispatch(UsersActions.Login({ payload: user }));
     this.store.select('userState').subscribe(state => {
-      if (state.bIsLoggedIn) this.router.navigate(['admin']);
+      if (state.bIsLoggedIn) this.router.navigate([sRoute]);
     });
   }
   isUser(): Observable<boolean> { return this.store.select('userState').pipe(map(state => state.bIsUser)); }

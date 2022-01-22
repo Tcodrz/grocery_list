@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private loginService: LoginService,
+    private router: Router
   ) { }
   get title(): string { return this.bShowRegister ? 'הרשמה' : 'כניסה' }
   get linkText(): string { return this.bShowRegister ? 'יש לי חשבון' : 'אני רוצה להירשם'; }
@@ -46,7 +48,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void { }
   onSubmit(): void {
-    this.loginService.onLogin(this.loginForm.value, this.bShowRegister);
+    let sRoute = 'admin';
+    const url = this.router.url;
+    if (url.split('/')[1] === 'list-invite') sRoute = url;
+    this.loginService.onLogin(this.loginForm.value, this.bShowRegister, sRoute);
   }
   toggleRegistered(): void {
     this.bShowRegister = !this.bShowRegister;

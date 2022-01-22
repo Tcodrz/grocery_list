@@ -1,0 +1,9 @@
+<gl-spinner *ngIf="!list"></gl-spinner>
+<p-card *ngIf="list">
+  <pre>{{ list }}</pre>
+  <h1>קיבלת הזמנה לרשימת {{ list.sName }}</h1>
+  <h4>לחץ
+    <span class="link" (click)="onGoToList()">כאן</span>
+    למעבר לרשימה
+  </h4>
+</p-card>

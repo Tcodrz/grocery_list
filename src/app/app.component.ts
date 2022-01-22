@@ -1,9 +1,9 @@
-import { map, Observable } from 'rxjs';
-import { User } from './core/models/user.interface';
-import { CacheService, AppCacheKeys } from './core/services/cache.service';
-import { Store } from '@ngrx/store';
-import { Component, OnInit } from '@angular/core';
+import { AppCacheKeys, CacheService } from './core/services/cache.service';
 import { AppState } from './state';
+import { Component, OnInit } from '@angular/core';
+import { map, Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { User } from './core/models/user.interface';
 import * as UsersActions from './state/users/users.actions';
 
 @Component({

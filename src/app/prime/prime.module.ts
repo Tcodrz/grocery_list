@@ -8,9 +8,9 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputTextModule } from 'primeng/inputtext';
 import { ListboxModule } from 'primeng/listbox';
 import { MenubarModule } from 'primeng/menubar';
+import { MenuModule } from 'primeng/menu';
 import { NgModule } from '@angular/core';
 import { TabViewModule } from 'primeng/tabview';
-
 
 @NgModule({
   declarations: [],
@@ -24,6 +24,7 @@ import { TabViewModule } from 'primeng/tabview';
     InputTextareaModule,
     InputTextModule,
     ListboxModule,
+    MenuModule,
     MenubarModule,
     TabViewModule,
   ],
@@ -37,6 +38,7 @@ import { TabViewModule } from 'primeng/tabview';
     InputTextareaModule,
     InputTextModule,
     ListboxModule,
+    MenuModule,
     MenubarModule,
     TabViewModule,
   ]

@@ -1,3 +1,6 @@
+import { PrimeModule } from './prime/prime.module';
+import { ListInviteComponent } from './core/components/list-invite/list-invite.component';
+import { AdminModule } from './admin/admin.module';
 import { LoginModule } from './login/login.module';
 import { SpinnerInterceptor } from './core/interceptors/spinner.interceptor';
 import { StateModule } from './state/state.module';
@@ -16,12 +19,15 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
+    ListInviteComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     LoginModule,
+    AdminModule,
+    PrimeModule,
     SharedModule,
     ListModule,
     StateModule,

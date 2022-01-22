@@ -92,7 +92,16 @@ export class ListsEffects {
         map(list => (ListsActions.ItemUpdated({ payload: list })))
       )
     })
-  ))
+  ));
+  fetchList$ = createEffect(() => this.actions$.pipe(
+    ofType(ListsActions.FetchList),
+    mergeMap((action) => {
+      const url = this.api.buildUrl({ route: `${ApiListRoutes.Main}/${ApiListRoutes.GetByID}` });
+      return this.api.post<List>(url, { sListID: action.sListID }).pipe(
+        map((list) => (ListsActions.ListFetched({ payload: list })))
+      );
+    })
+  ));
   constructor(
     private actions$: Actions,
     private store: Store<AppState>,

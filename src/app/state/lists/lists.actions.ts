@@ -22,3 +22,5 @@ export const DeleteList = createAction('[LISTS] DELETE LIST', props<{ payload: L
 export const ListDeleted = createAction('[LISTS] DELETED');
 export const UpdateItem = createAction('[LISTS] UPDATE ITEM', props<{ sListID: string; item: Item }>());
 export const ItemUpdated = createAction('[LSITS] ITEM UPDATED', props<{ payload: List }>());
+export const FetchList = createAction('[LIST] FETCH', props<{ sListID: string }>());
+export const ListFetched = createAction('[LIST] FETCHED', props<{ payload: List }>());

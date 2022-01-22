@@ -9,3 +9,4 @@ export const GetUserFromCache = createAction('[USERS] GET FROM CAHCE', props<{ p
 export const GetUsersLists = createAction('[USERS] GET LISTS', props<{ payload: string }>());
 export const UpdateUser = createAction('[USERS] UPDATE USER', props<{ payload: User }>());
 export const Reset = createAction('[USERS] RESET');
+export const AddPulicList = createAction('[USERS] ADD PUBLIC LIST', props<{ sListID: string, sUserID: string }>());

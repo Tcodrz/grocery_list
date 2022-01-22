@@ -4,4 +4,5 @@ export interface List {
   sName: string;
   items: Item[];
   dCreated?: Date;
+  bIsPublic?: boolean;
 }

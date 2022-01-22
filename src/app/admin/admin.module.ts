@@ -1,3 +1,4 @@
+import { LoginModule } from './../login/login.module';
 import { ProfileModule } from './../profile/profile.module';
 import { ListModule } from './../list/list.module';
 import { PrimeModule } from './../prime/prime.module';
@@ -11,7 +12,7 @@ import { AdminComponent } from './admin.component';
 
 @NgModule({
   declarations: [
-    AdminComponent
+    AdminComponent,
   ],
   imports: [
     CommonModule,
@@ -19,7 +20,8 @@ import { AdminComponent } from './admin.component';
     ListModule,
     ProfileModule,
     SharedModule,
-    PrimeModule
+    PrimeModule,
+    LoginModule,
   ]
 })
 export class AdminModule { }

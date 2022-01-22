@@ -6,8 +6,10 @@
         {{ (modal$ | async).params.sTitle }}
       </div>
     </ng-template>
-    <gl-modal-add-item *ngIf="(modal$ | async).params.sComponent === 'add-item'" (close)="onHide()"></gl-modal-add-item>
-    <gl-modal-add-list *ngIf="(modal$ | async).params.sComponent === 'add-list'" (close)="onHide()"></gl-modal-add-list>
+    <gl-modal-add-item *ngIf="(modal$ | async).params.sComponent === 'add-item'" [params]="(modal$ | async).params"
+      (close)="onHide()"></gl-modal-add-item>
+    <gl-modal-add-list *ngIf="(modal$ | async).params.sComponent === 'add-list'" [params]="(modal$ | async).params"
+      (close)="onHide()"></gl-modal-add-list>
     <gl-modal-confirm *ngIf="(modal$ | async).params.sComponent === 'confirm'" [params]="(modal$ | async).params"
       (close)="onHide()"></gl-modal-confirm>
     <gl-modal-item-edit *ngIf="(modal$ | async).params.sComponent === 'item-edit'" [params]="(modal$ | async).params"

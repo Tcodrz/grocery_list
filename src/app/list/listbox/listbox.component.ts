@@ -38,7 +38,11 @@ export class ListboxComponent implements OnInit {
   onAddItem(): void {
     this.modalService.open({
       sComponent: 'add-item',
-      sTitle: 'הוספת פריט'
+      sTitle: 'הוספת פריט',
+      cb: (item: Item) => {
+        item.sListID = this.list._id;
+        this.store.dispatch(ListsActions.AddItemToList({ payload: { listID: this.list._id, item: item } }))
+      }
     });
   }
   onMarkChecked(): void {

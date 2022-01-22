@@ -1,11 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { AppState } from '../state';
-import * as ListsActions from '../state/lists/lists.actions';
+import { Component, OnInit } from '@angular/core';
 import { List } from './../core/models/list.interface';
+import { Store } from '@ngrx/store';
 import { User } from './../core/models/user.interface';
-import { ModalGenericService } from './../shared/services/modal-generic.service';
 
 @Component({
   selector: 'gl-admin',
@@ -19,10 +16,7 @@ export class AdminComponent implements OnInit {
   iActiveList: number;
   iTabIndex: number;
   constructor(
-    private activeRoutes: ActivatedRoute,
-    private router: Router,
     private store: Store<AppState>,
-    private modals: ModalGenericService,
   ) { }
 
   ngOnInit(): void {
@@ -32,9 +26,6 @@ export class AdminComponent implements OnInit {
       this.iActiveList = listState.iCurrentList;
       this.bIsLoading = false;
     });
-  }
-  onAddList(): void {
-    this.modals.open({ sComponent: 'add-list', sTitle: 'הוספת רשימה' });
   }
 
 }

@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1642845525163,
+  "timestamp": 1642867942530,
   "index": "https://Tcodrz.github.io/grocery_list/index.html",
   "assetGroups": [
     {
@@ -13,11 +13,11 @@
       "urls": [
         "https://Tcodrz.github.io/grocery_list/favicon.ico",
         "https://Tcodrz.github.io/grocery_list/index.html",
-        "https://Tcodrz.github.io/grocery_list/main.0514a3fc2962491a.js",
+        "https://Tcodrz.github.io/grocery_list/main.92fb2a906add9bcd.js",
         "https://Tcodrz.github.io/grocery_list/manifest.webmanifest",
         "https://Tcodrz.github.io/grocery_list/polyfills.3715f7d29f9322a1.js",
         "https://Tcodrz.github.io/grocery_list/runtime.099aa6bcfd09aba5.js",
-        "https://Tcodrz.github.io/grocery_list/styles.78f34bd8320f7df4.css"
+        "https://Tcodrz.github.io/grocery_list/styles.8095a01ca0ddad01.css"
       ],
       "patterns": []
     },
@@ -83,15 +83,15 @@
     "https://Tcodrz.github.io/grocery_list/color.dae87a04d07ca92b.png": "ff4c4bcb2207891b292f544edb4da9d2df5d45cf",
     "https://Tcodrz.github.io/grocery_list/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
     "https://Tcodrz.github.io/grocery_list/hue.8b1818380241e6ac.png": "f81ae627637a684614aa726e206c73ce099a01fd",
-    "https://Tcodrz.github.io/grocery_list/index.html": "9cdb629bc91f5ef841427b3d8b4f2ef4732e8f4d",
-    "https://Tcodrz.github.io/grocery_list/main.0514a3fc2962491a.js": "76b46354e0545f252991344e73deb9c1b3429d27",
+    "https://Tcodrz.github.io/grocery_list/index.html": "4f08402ffc7530d422a6288a9e0022aa02969bf9",
+    "https://Tcodrz.github.io/grocery_list/main.92fb2a906add9bcd.js": "288857e8a0df2e78d71763c18bdef9972344a2e8",
     "https://Tcodrz.github.io/grocery_list/manifest.webmanifest": "a4e2cab399ed99b710305dd893bb41d72238c790",
     "https://Tcodrz.github.io/grocery_list/polyfills.3715f7d29f9322a1.js": "bb04ae2f95b01b341ba4168788f55fdc8b65e8da",
     "https://Tcodrz.github.io/grocery_list/primeicons.29151a741d66863a.woff": "21e477ea19e15b66344bcc23b3fbb2161092a707",
     "https://Tcodrz.github.io/grocery_list/primeicons.5f5d08cd089b4e5d.ttf": "e6c86ca90a9fb4282fb35523d56fde00e78a1416",
     "https://Tcodrz.github.io/grocery_list/primeicons.76044b1c189cc4d7.svg": "621775b2ec555fd2dd152a24390cf6dfeee168b1",
     "https://Tcodrz.github.io/grocery_list/runtime.099aa6bcfd09aba5.js": "a5ce8f4ffdbfbe7727cb07ec18f5dc36afd608f9",
-    "https://Tcodrz.github.io/grocery_list/styles.78f34bd8320f7df4.css": "41fc48d670a7e15c49277c96b24dd0347eec2496"
+    "https://Tcodrz.github.io/grocery_list/styles.8095a01ca0ddad01.css": "babdfaa0484ead50729a99e2858fa525142ad55b"
   },
   "navigationUrls": [
     {

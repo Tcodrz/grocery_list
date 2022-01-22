@@ -17,8 +17,8 @@ const _listsReducer = createReducer(
   initialState,
   on(ListsActions.Loaded, (state, action) => {
     return {
+      ...state,
       lists: action.payload,
-      iCurrentList: 0
     };
   }),
   on(ListsActions.ListAdded, (state, action) => {
@@ -46,15 +46,18 @@ const _listsReducer = createReducer(
     return { ...state };
   }),
   on(ListsActions.ItemsAddedToList, (state, action) => {
+    const index = state.lists.findIndex(list => list._id === action.payload._id);
     return {
       ...state,
-      lists: state.lists.map(list => list._id === action.payload._id ? action.payload : list)
+      lists: state.lists.map(list => list._id === action.payload._id ? action.payload : list),
+      iCurrentList: index,
     }
   }),
   on(ListsActions.RemoveItemsFromList, (state, action) => {
     const list = state.lists.find(l => l._id === action.payload.listID);
+    const index = state.lists.findIndex(l => l._id === list._id);
     Utils.removeItemsFromList(list.items, action.payload.items);
-    return state;
+    return { ...state, iCurrentList: index };
   }),
   on(ListsActions.ItemsRemovedFromList, (state, action) => {
     return {

@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1643202648828,
+  "timestamp": 1643203031955,
   "index": "https://Tcodrz.github.io/grocery_list/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "https://Tcodrz.github.io/grocery_list/favicon.ico",
         "https://Tcodrz.github.io/grocery_list/index.html",
-        "https://Tcodrz.github.io/grocery_list/main.31e535d0032272a2.js",
+        "https://Tcodrz.github.io/grocery_list/main.62b6383e1f007e89.js",
         "https://Tcodrz.github.io/grocery_list/manifest.webmanifest",
         "https://Tcodrz.github.io/grocery_list/polyfills.3715f7d29f9322a1.js",
         "https://Tcodrz.github.io/grocery_list/runtime.099aa6bcfd09aba5.js",
@@ -115,9 +115,9 @@
     "https://Tcodrz.github.io/grocery_list/color.dae87a04d07ca92b.png": "ff4c4bcb2207891b292f544edb4da9d2df5d45cf",
     "https://Tcodrz.github.io/grocery_list/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
     "https://Tcodrz.github.io/grocery_list/hue.8b1818380241e6ac.png": "f81ae627637a684614aa726e206c73ce099a01fd",
-    "https://Tcodrz.github.io/grocery_list/index.html": "556a230107dd0d858f54047f043806d53e9161ca",
-    "https://Tcodrz.github.io/grocery_list/main.31e535d0032272a2.js": "0ead709058c7810b353c9284692e8a867ff267d5",
-    "https://Tcodrz.github.io/grocery_list/manifest.webmanifest": "8596586e2ebaa9f783d9f63f2ce2c5d835c20964",
+    "https://Tcodrz.github.io/grocery_list/index.html": "796a45456c362438bcf12dec818a98fce7e01089",
+    "https://Tcodrz.github.io/grocery_list/main.62b6383e1f007e89.js": "616733e6858c46c90ce20acdfd0d1563e1bdc93b",
+    "https://Tcodrz.github.io/grocery_list/manifest.webmanifest": "fe400345655e113beafbcb723deb69e1bea51088",
     "https://Tcodrz.github.io/grocery_list/polyfills.3715f7d29f9322a1.js": "bb04ae2f95b01b341ba4168788f55fdc8b65e8da",
     "https://Tcodrz.github.io/grocery_list/primeicons.29151a741d66863a.woff": "21e477ea19e15b66344bcc23b3fbb2161092a707",
     "https://Tcodrz.github.io/grocery_list/primeicons.5f5d08cd089b4e5d.ttf": "e6c86ca90a9fb4282fb35523d56fde00e78a1416",

@@ -5,7 +5,7 @@
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "./",
-  "start_url": "https://Tcodrz.github.io/grocery_list/",
+  "start_url": "./",
   "icons": [
     {
       "src": "assets/icons/sc-72x72.png",

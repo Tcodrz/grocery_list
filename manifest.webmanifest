@@ -1,6 +1,6 @@
 {
-  "name": "grocery-list",
-  "short_name": "grocery-list",
+  "name": "list-manager",
+  "short_name": "list-manager",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",

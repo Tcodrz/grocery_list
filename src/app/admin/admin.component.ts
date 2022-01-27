@@ -15,7 +15,6 @@ export class AdminComponent implements OnInit {
   usersLists: List[];
   publicLists: List[];
   bIsLoading = true;
-  iActiveList: number;
   iTabIndex: number;
   constructor(
     private store: Store<AppState>,
@@ -26,7 +25,6 @@ export class AdminComponent implements OnInit {
       this.user = userState.user;
       this.usersLists = listState.lists.filter(list => !list.bIsPublic);
       this.publicLists = listState.lists.filter(list => list.bIsPublic);
-      this.iActiveList = listState.iCurrentList;
       this.bIsLoading = false;
     });
   }

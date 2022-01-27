@@ -6,4 +6,5 @@ export interface Item {
   bChecked: boolean;
   sUnit?: string;
   sComment?: string;
+  dCreated:string;
 }

@@ -1,7 +1,7 @@
 <button pButton type="button" class="p-button-raised p-button-primary w-100 mb-1" icon="pi pi-plus"
   (click)="onAddList()">הוספת רשימה</button>
-<p-accordion *ngIf="lists.length > 0" expandIcon="pi pi-fw pi-chevron-left" [(activeIndex)]="iCurrentIndex">
-  <p-accordionTab *ngFor="let list of lists; let i = index" (selectedChange)="onChangeList(i)">
+<p-accordion *ngIf="lists.length > 0" expandIcon="pi pi-fw pi-chevron-left" [(activeIndex)]="iCurrentIndex" (onOpen)="onChangeList($event)">
+  <p-accordionTab *ngFor="let list of lists; let i = index">
     <ng-template pTemplate="header">
       {{ list.sName }}
     </ng-template>

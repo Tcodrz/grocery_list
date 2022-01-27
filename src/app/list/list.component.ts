@@ -6,7 +6,6 @@ import { ModalGenericService } from './../shared/services/modal-generic.service'
 import { Store } from '@ngrx/store';
 import { User } from './../core/models/user.interface';
 import * as ListsActions from '../state/lists/lists.actions';
-
 @Component({
   selector: 'gl-lists',
   templateUrl: './list.component.html',
@@ -24,21 +23,14 @@ export class ListComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     this.iCurrentIndex = this.cache.getItem<number>(AppCacheKeys.iActiveList) || 0;
   }
-  ngOnInit(): void {
-    this.store.select('listState').subscribe(state => {
-      if (state.iCurrentList >= 0) {
-        this.iCurrentIndex = state.iCurrentList;
-        this.cache.cache(AppCacheKeys.iActiveList, state.iCurrentList);
-      }
-    });
-  }
-  onChangeList(i: number) {
-    this.cache.cache(AppCacheKeys.iActiveList, i);
+  ngOnInit(): void { }
+  onChangeList({ index }) {
+    this.iCurrentIndex = index;
+    this.cache.cache(AppCacheKeys.iActiveList, index);
   }
   onAddList(): void {
     this.modal.open({
-      sComponent: 'add-list',
-      sTitle: 'הוספת רשימה',
+      sComponent: 'add-list', sTitle: 'הוספת רשימה',
       cb: (listName: string) => {
         this.store.dispatch(ListsActions.Add({
           payload: {

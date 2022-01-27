@@ -18,76 +18,39 @@ export const initialState: ListsState = {
 const _listsReducer = createReducer(
   initialState,
   on(ListsActions.Loaded, (state, action) => {
-    return {
-      ...state,
-      lists: action.payload,
-    };
+    return { ...state, lists: Utils.sortListItems(action.payload) };
   }),
   on(ListsActions.ListAdded, (state, action) => {
     const lists = [...state.lists, action.payload];
-    const index = lists.findIndex(list => list._id === action.payload._id);
-    return {
-      ...state,
-      lists: lists,
-      iCurrentList: index
-    }
+    return { ...state, lists: Utils.sortListItems(lists) }
   }),
   on(ListsActions.Remove, (state, action) => {
-    return {
-      ...state,
-      lists: state.lists.filter(list => list !== action.payload),
-    }
+    return { ...state, lists: state.lists.filter(list => list !== action.payload) }
   }),
   on(ListsActions.setCurrentList, (state, action) => {
-    return {
-      ...state,
-      iCurrentList: action.payload
-    }
-  }),
-  on(ListsActions.AddItemToList, (state, action) => {
-    return { ...state };
+    return { ...state, iCurrentList: action.payload }
   }),
   on(ListsActions.ItemsAddedToList, (state, action) => {
-    const index = state.lists.findIndex(list => list._id === action.payload._id);
-    return {
-      ...state,
-      lists: state.lists.map(list => list._id === action.payload._id ? action.payload : list),
-      iCurrentList: index,
-    }
-  }),
-  on(ListsActions.RemoveItemsFromList, (state, action) => {
-    const list = state.lists.find(l => l._id === action.payload.listID);
-    const index = state.lists.findIndex(l => l._id === list._id);
-    Utils.removeItemsFromList(list.items, action.payload.items);
-    return { ...state, iCurrentList: index };
+    const lists = Utils.updateList(state.lists, action.payload);
+    const sorted = Utils.sortListItems(lists)
+    return { ...state, lists: sorted }
   }),
   on(ListsActions.ItemsRemovedFromList, (state, action) => {
-    return {
-      ...state,
-      lists: state.lists.map(list => list._id === action.payload._id ? action.payload : list)
-    };
+    const lists = Utils.updateList(state.lists, action.payload);
+    const sorted = Utils.sortListItems(lists);
+    return { ...state, lists: sorted };
   }),
   on(ListsActions.Reset, () => initialState),
-  on(ListsActions.ItemsAddedToList, (state, action) => {
-    return {
-      ...state,
-      lists: state.lists.map(list => list._id === action.payload._id ? action.payload : list)
-    }
-  }),
   on(ListsActions.ItemsUnChecked, (state, action) => {
-    return {
-      ...state,
-      lists: state.lists.map(list => list._id === action.payload._id ? action.payload : list)
-    };
+    return { ...state, lists: Utils.updateList(state.lists, action.payload) };
   }),
   on(ListsActions.ItemsChecked, (state, action) => {
-    return {
-      ...state,
-      lists: state.lists.map(list => list._id === action.payload._id ? action.payload : list)
-    }
+    return { ...state, lists: Utils.sortListItems(Utils.updateList(state.lists, action.payload)) }
   }),
   on(ListsActions.DeleteList, (state, action) => ({ ...state, lists: state.lists.filter(list => list._id !== action.payload._id) })),
-  on(ListsActions.ItemUpdated, (state, action) => ({ ...state, lists: state.lists.map(list => list._id === action.payload._id ? action.payload : list) })),
+  on(ListsActions.ItemUpdated, (state, action) => {
+    return { ...state, lists: Utils.updateList(state.lists, action.payload) }
+  }),
   on(ListsActions.ListFetched, (state, action) => ({ ...state, listInvite: action.payload })),
 );
 

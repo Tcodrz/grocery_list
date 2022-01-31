@@ -1,3 +1,5 @@
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { PrimeModule } from './prime/prime.module';
 import { ListInviteComponent } from './core/components/list-invite/list-invite.component';
 import { AdminModule } from './admin/admin.module';
@@ -36,7 +38,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
       // Register the ServiceWorker as soon as the app is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    })
+    }),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true }

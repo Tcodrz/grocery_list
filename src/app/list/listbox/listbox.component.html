@@ -6,16 +6,16 @@
         (click)="menu.toggle($event)"></button>
     </div>
     <div class="mr-auto">
-      <button *ngIf="bShowTrash" (click)="removeItems()" pButton type="button"
+      <button *ngIf="bShowTrash" (click)="onListAction(ListActions.DeleteItems)" pButton type="button"
         class="p-button-text p-button-rounded p-button-danger" icon="pi pi-trash"></button>
-      <button *ngIf="bShowCheck" (click)="onMarkChecked()" pButton type="button" class="p-button-text p-button-rounded"
-        icon="pi pi-check"></button>
-      <button *ngIf="bShowUnCheck" (click)="onItemsUnCheck()" pButton type="button"
+      <button *ngIf="bShowCheck" (click)="onListAction(ListActions.MarkChecked)" pButton type="button"
+        class="p-button-text p-button-rounded" icon="pi pi-check"></button>
+      <button *ngIf="bShowUnCheck" (click)="onListAction(ListActions.MarkUnchecked)" pButton type="button"
         class="p-button-text p-button-rounded" icon="pi pi-undo"></button>
       <button *ngIf="bShowItemEdit" pButton type="button" class="p-button-text p-button-rounded p-button-secondary"
-        icon="pi pi-pencil" (click)="onItemEdit()"></button>
+        icon="pi pi-pencil" (click)="onListAction(ListActions.ItemEdit)"></button>
       <button *ngIf="bShowAdd" pButton type="button" class="p-button-text p-button-rounded p-button-secondary mr-1"
-        icon="pi pi-plus" (click)="onAddItem()"></button>
+        icon="pi pi-plus" (click)="onListAction(ListActions.AddItem)"></button>
     </div>
   </ng-template>
   <ng-template let-item pTemplate="item">

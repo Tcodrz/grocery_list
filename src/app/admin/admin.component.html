@@ -13,7 +13,7 @@
   </p-tabPanel>
   <p-tabPanel>
     <ng-template pTemplate="header">
-      <img [src]="user.sProfilePic" class="profile-pic" alt="">
+      <img *ngIf="user" [src]="user.sProfilePic" class="profile-pic" alt="">
     </ng-template>
     <ng-template pTemplate=" content">
       <div>

@@ -1,11 +1,19 @@
-import { MenuItem } from 'primeng/api';
-import { Store } from '@ngrx/store';
-import { ModalGenericService } from './../../shared/services/modal-generic.service';
-import { List } from './../../core/models/list.interface';
-import { Item } from 'src/app/core/models/item.interface';
 import { Component, Input, OnInit } from '@angular/core';
-import * as ListsActions from '../../state/lists/lists.actions';
+import { Store } from '@ngrx/store';
+import { MenuItem } from 'primeng/api';
+import { Item } from 'src/app/core/models/item.interface';
 import { AppState } from 'src/app/state';
+import * as ListsActions from '../../state/lists/lists.actions';
+import { List } from './../../core/models/list.interface';
+import { ModalGenericService } from './../../shared/services/modal-generic.service';
+
+enum ListActions {
+  AddItem,
+  DeleteItems,
+  MarkChecked,
+  MarkUnchecked,
+  ItemEdit,
+}
 
 @Component({
   selector: 'gl-listbox',
@@ -17,7 +25,7 @@ export class ListboxComponent implements OnInit {
   items: Item[] = [];
   aSelectedItems: Item[] = [];
   menuItems: MenuItem[];
-
+  ListActions = ListActions;
   constructor(
     private modalService: ModalGenericService,
     private store: Store<AppState>
@@ -32,33 +40,51 @@ export class ListboxComponent implements OnInit {
   get bShowTrash(): boolean { return this.aSelectedItems.length > 0 }
   get bShowUnCheck(): boolean { return this.aSelectedItems.length > 0 && this.aSelectedItems.every(item => item.bChecked); }
   get bShowItemEdit(): boolean { return this.aSelectedItems.length === 1; }
-  removeItems(): void {
-    this.aSelectedItems.forEach(item => this.store.dispatch(ListsActions.RemoveItemsFromList({ payload: { listID: this.list._id, items: this.aSelectedItems } })));
-    this.aSelectedItems = [];
+
+  onListAction(action: ListActions) {
+    const bChecked = action === ListActions.MarkChecked;
+    let items: Item[] = [];
+    switch (action) {
+      case ListActions.AddItem:
+        this.onAddItem();
+        break;
+      case ListActions.DeleteItems:
+        items = this.list.items.filter(item => !this.aSelectedItems.includes(item));
+        break;
+      case ListActions.MarkChecked:
+      case ListActions.MarkUnchecked:
+        items = this.list.items.map(item => {
+          if (this.aSelectedItems.includes(item)) return { ...item, bChecked: bChecked };
+          else return item;
+        });
+        break;
+      case ListActions.ItemEdit:
+        this.onItemEdit();
+        break;
+      default: debugger;
+    }
+    const list: List = { ...this.list, items };
+    this.store.dispatch(ListsActions.Update({ payload: list }));
   }
   onAddItem(): void {
     this.modalService.open({
       sComponent: 'add-item',
       sTitle: 'הוספת פריט',
       cb: (item: Item) => {
-        item.sListID = this.list._id;
-        this.store.dispatch(ListsActions.AddItemToList({ payload: { listID: this.list._id, item: item } }))
+        item.sListID = this.list.id;
+        this.store.dispatch(ListsActions.AddItemToList({ payload: { list: this.list, item } }));
       }
     });
-  }
-  onMarkChecked(): void {
-    this.store.dispatch(ListsActions.MarkItemsChecked({ sListID: this.list._id, items: this.aSelectedItems }));
-    this.aSelectedItems = [];
-  }
-  onItemsUnCheck(): void {
-    this.store.dispatch(ListsActions.ItemsUnCheck({ sListID: this.list._id, items: this.aSelectedItems }));
-    this.aSelectedItems = [];
   }
   onItemEdit(): void {
     this.modalService.open({
       sComponent: 'item-edit',
       sTitle: this.aSelectedItems[0].sName,
-      cb: (item: Item) => { this.store.dispatch(ListsActions.UpdateItem({ sListID: this.list._id, item: item })); },
+      cb: (item: Item) => {
+        const items = this.list.items.map(i => i.id === item.id ? item : i);
+        const list = { ...this.list, items };
+        this.store.dispatch(ListsActions.Update({ payload: list }));
+      },
       inputs: { item: this.aSelectedItems[0] }
     });
   }

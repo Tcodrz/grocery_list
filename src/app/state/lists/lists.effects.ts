@@ -42,58 +42,23 @@ export class ListsEffects {
         )
     })
   ));
-  addItemToList$ = createEffect(() => this.actions$.pipe(
+  addItem$ = createEffect(() => this.actions$.pipe(
     ofType(ListsActions.AddItemToList),
-    mergeMap((action) => {
-      const url = this.api.buildUrl({ route: `${ApiRoutes.Lists}/${ApiListItemRoutes.Add}` });
-      const data = action.payload.item;
-      return this.api.post<List>(url, data).pipe(map((list) =>
-        ListsActions.ItemsAddedToList({ payload: list }))
-      )
+    map(action => {
+      debugger;
+      const { list, item } = action.payload;
+      const i = { ...item, id: this.db.createId() };
+      const newList = { ...list, items: list.items.concat(i) };
+      this.db.doc(`lists/${list.id}`).set(newList);
+      return ListsActions.ItemAddedToList({ payload: newList });
     })
-  ));
-  removeItemsFromList$ = createEffect(() => this.actions$.pipe(
-    ofType(ListsActions.RemoveItemsFromList),
-    mergeMap((action) => {
-      const url = this.api.buildUrl({ route: `${ApiRoutes.Lists}/${ApiListItemRoutes.Remove}` });
-      const data = { sListID: action.payload.listID, items: action.payload.items };
-      return this.api.post<List>(url, data).pipe(map((list) =>
-        (ListsActions.ItemsRemovedFromList({ payload: list }))))
-    })
-  ));
-  markItemsChecked$ = createEffect(() => this.actions$.pipe(
-    ofType(ListsActions.MarkItemsChecked),
-    mergeMap((action) => {
-      const url = this.api.buildUrl({ route: `${ApiListRoutes.Main}/${ApiListRoutes.MarkItemsChecked}` })
-      return this.api.post<List>(url, action).pipe(
-        map(list => (ListsActions.ItemsChecked({ payload: list }))))
-    })
-  ));
-  itemsUnCheck$ = createEffect(() => this.actions$.pipe(
-    ofType(ListsActions.ItemsUnCheck),
-    mergeMap((action) => {
-      const url = this.api.buildUrl({ route: `${ApiListRoutes.Main}/${ApiListRoutes.ItemsUnCheck}` })
-      return this.api.post<List>(url, action).pipe(
-        map(list => (ListsActions.ItemsChecked({ payload: list })))
-      )
-    })
-  ));
-  deleteList$ = createEffect(() => this.actions$.pipe(
-    ofType(ListsActions.DeleteList),
-    mergeMap((action) => {
-      const url = this.api.buildUrl({ route: `${ApiListRoutes.Main}/${ApiListRoutes.DeleteList}` });
-      return this.api.post<any>(url, action.payload).pipe(
-        map(() => (ListsActions.ListDeleted()))
-      )
-    })
-  ));
-  updateItem$ = createEffect(() => this.actions$.pipe(
-    ofType(ListsActions.UpdateItem),
-    mergeMap(({ sListID, item }) => {
-      const url = this.api.buildUrl({ route: `${ApiListRoutes.Main}/${ApiListRoutes.UpdateItem}` });
-      return this.api.post<List>(url, { sListID, item }).pipe(
-        map(list => (ListsActions.ItemUpdated({ payload: list })))
-      )
+  ))
+  update$ = createEffect(() => this.actions$.pipe(
+    ofType(ListsActions.Update),
+    map((action) => {
+      const list = action.payload;
+      this.db.doc(`lists/${list.id}`).set(list);
+      return ListsActions.Updated({ payload: list })
     })
   ));
   fetchList$ = createEffect(() => this.actions$.pipe(

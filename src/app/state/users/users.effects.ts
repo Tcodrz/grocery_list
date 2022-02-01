@@ -33,13 +33,6 @@ export class UsersEffects {
     ofType(UsersActions.UserLoggedIn),
     map((action) => (ListsActions.Load({ sUserID: action.payload.id })))
   ));
-  getLists$ = createEffect(() => this.actions$.pipe(
-    ofType(UsersActions.GetUsersLists),
-    mergeMap((action) => {
-      const url = this.api.buildUrl({ route: `${UsersRoutes.Main}/${UsersRoutes.GetLists}` });
-      return this.api.post<List[]>(url, action.payload).pipe(
-        map((lists) => (ListsActions.AddLists({ payload: lists }))))
-    })));
   getUserFromCache$ = createEffect(() => this.actions$.pipe(
     ofType(UsersActions.GetUserFromCache),
     mergeMap((action) => {

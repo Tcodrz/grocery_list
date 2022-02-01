@@ -1,3 +1,3 @@
 importScripts('./ngsw-worker.js');
 
-// v1
+// v2

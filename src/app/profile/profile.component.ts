@@ -36,11 +36,11 @@ export class ProfileComponent implements OnInit {
     })
   }
   private initUserDetails(): void {
-    this.userDetails = this.fb.group({
-      sFirstName: [this.user.sFirstName, null],
-      sLastName: [this.user.sLastName, null],
-      sEmail: [this.user.sEmail, null],
-    });
+    // this.userDetails = this.fb.group({
+    //   sFirstName: [this.user.sFirstName, null],
+    //   sLastName: [this.user.sLastName, null],
+    //   sEmail: [this.user.sEmail, null],
+    // });
   }
   onUpdateUserDetails(): void {
     this.store.dispatch(UsersActions.UpdateUser({ payload: this.userDetails.value }));

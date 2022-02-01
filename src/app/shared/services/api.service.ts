@@ -1,3 +1,6 @@
+import { AngularFirestore } from '@angular/fire/firestore';
+import { List } from './../../core/models/list.interface';
+import { ApiListRoutes, ApiRoutes } from './../../core/models/api-routes.enum';
 import { environment } from './../../../environments/environment';
 import { ApiResponse } from './../../core/models/api-response.interface';
 import { Observable, map, tap } from 'rxjs';
@@ -10,7 +13,8 @@ import { Injectable } from '@angular/core';
 export class ApiService {
   private readonly api = environment.apiURL;
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private db: AngularFirestore,
   ) { }
   get<T>(url: string): Observable<T> {
     return this.http.get<ApiResponse>(url).pipe(
@@ -35,4 +39,23 @@ export class ApiService {
   buildUrl(params: { route: string }): string {
     return `${this.api}/${params.route}`;
   }
+  // populateDB(sUserID: string): void {
+  //   const url = this.buildUrl({ route: `${ApiRoutes.Lists}/${ApiListRoutes.Load}` });
+  //   this.post<List[]>(url, { sUserID }).subscribe(lists => {
+  //     console.log(lists);
+  //     lists.forEach(async (list) => {
+  //       this.db.collection('lists').add(list).then(res => {
+  //         list.id = res.id;
+  //         delete list._id;
+  //         delete list.__v;
+  //         list.items.forEach(item => {
+  //           item.id = this.db.createId();
+  //           item.sListID = list.id;
+  //           delete item._id;
+  //         })
+  //         this.db.doc(`lists/${list.id}`).set(list);
+  //       });
+  //     })
+  //   })
+  // }
 }

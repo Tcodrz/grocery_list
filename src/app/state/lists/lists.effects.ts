@@ -1,3 +1,4 @@
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -18,8 +19,10 @@ export class ListsEffects {
     ofType(ListsActions.Load),
     mergeMap((action) => {
       const url = this.api.buildUrl({ route: `${ApiRoutes.Lists}/${ApiListRoutes.Load}` });
-      return this.api.post<List[]>(url, { sUserID: action.sUserID })
+      // return this.api.post<List[]>(url, { sUserID: action.sUserID })
+      return this.db.collection<List>('lists').valueChanges()
         .pipe(
+          map(lists => lists.filter(list => list.aUserIDs.includes(action.sUserID))),
           map(lists => (ListsActions.Loaded({ payload: lists })))
         )
     })
@@ -105,7 +108,8 @@ export class ListsEffects {
   constructor(
     private actions$: Actions,
     private store: Store<AppState>,
-    private api: ApiService
+    private api: ApiService,
+    private db: AngularFirestore,
   ) { this.init(); }
   init(): void {
     this.store.select('listState').subscribe(state => this.state = state);

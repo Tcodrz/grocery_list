@@ -1,15 +1,15 @@
+import { AppState } from 'src/app/state';
+import { CacheService } from './../../../core/services/cache.service';
 import { Component, OnInit } from '@angular/core';
+import { ListsState } from './../../../state/lists/lists.reducer';
+import { map, Observable } from 'rxjs';
+import { MenuItem } from 'primeng/api';
+import { ModalGenericService } from './../../services/modal-generic.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { MenuItem } from 'primeng/api';
-import { map, Observable } from 'rxjs';
 import { User } from 'src/app/core/models/user.interface';
-import { AppState } from 'src/app/state';
-import * as UsersActions from '../../../state/users/users.actions';
-import { CacheService } from './../../../core/services/cache.service';
 import * as ListsActions from './../../../state/lists/lists.actions';
-import { ListsState } from './../../../state/lists/lists.reducer';
-import { ModalGenericService } from './../../services/modal-generic.service';
+import * as UsersActions from '../../../state/users/users.actions';
 
 @Component({
   selector: 'gl-topnav',
@@ -52,7 +52,7 @@ export class TopnavComponent implements OnInit {
             }))
           },
           {
-            label: `${this.user.sFirstName} ${this.user.sLastName}`,
+            label: `${this.user.sName}`,
             icon: 'pi pi-user',
             items: [
               {

@@ -1,11 +1,12 @@
-import { AppCacheKeys, CacheService } from './core/services/cache.service';
-import { AppState } from './state';
 import { Component, OnInit } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import * as ListsActions from 'src/app/state/lists/lists.actions';
+import { List } from './core/models/list.interface';
 import { User } from './core/models/user.interface';
-import * as UsersActions from './state/users/users.actions';
-
+import { AppState } from './state';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,15 +16,21 @@ export class AppComponent implements OnInit {
   bIsUserLoggedIn$: Observable<boolean>;
   constructor(
     private store: Store<AppState>,
-    private cache: CacheService,
+    private db: AngularFirestore,
+    private auth: AngularFireAuth
   ) { }
   ngOnInit(): void {
-    const bIsUser = this.cache.isItem(AppCacheKeys.User);
-    if (bIsUser) {
-      const user = this.cache.getItem<User>(AppCacheKeys.User);
-      this.store.dispatch(UsersActions.UserLoggedIn({ payload: user }));
-    }
-    this.bIsUserLoggedIn$ = this.store.select('userState').pipe(map(userState => userState.bIsLoggedIn));
-
+    this.bIsUserLoggedIn$ = this.auth.user;
+    this.auth.user.subscribe(u => {
+      if (!!u) {
+        const user: User = {
+          sName: u.displayName,
+          sEmail: u.email,
+          sProfilePic: u.photoURL,
+          id: u.uid,
+        }
+        this.store.dispatch(ListsActions.Load({ sUserID: user.id }))
+      }
+    });
   }
 }

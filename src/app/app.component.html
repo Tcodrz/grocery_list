@@ -1,5 +1,6 @@
 <ng-container *ngIf="!(bIsUserLoggedIn$ | async)">
-  <gl-login></gl-login>
+  <!-- <gl-login></gl-login> -->
+  <gl-auth></gl-auth>
 </ng-container>
 <ng-container *ngIf="bIsUserLoggedIn$ | async">
   <router-outlet></router-outlet>

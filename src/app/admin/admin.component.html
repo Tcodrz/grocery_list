@@ -12,15 +12,16 @@
     </ng-template>
   </p-tabPanel>
   <p-tabPanel>
-    <ng-template pTemplate="header"><i class="pi pi-unlock"></i></ng-template>
-    <ng-template pTemplate=" content">
-      Complex Content to Lazy Load
+    <ng-template pTemplate="header">
+      <img [src]="user.sProfilePic" class="profile-pic" alt="">
     </ng-template>
-  </p-tabPanel>
-  <p-tabPanel>
-    <ng-template pTemplate="header"><i class="pi pi-user"></i></ng-template>
     <ng-template pTemplate=" content">
-      <gl-profile></gl-profile>
+      <div>
+        <button pButton class="p-button-outlined p-button-secondary" icon="pi pi-google" style="width: 100%"
+          (click)="onLogout()">
+          <span class="ml-2">התנתקות</span>
+        </button>
+      </div>
     </ng-template>
   </p-tabPanel>
 </p-tabView>

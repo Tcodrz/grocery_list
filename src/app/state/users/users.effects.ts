@@ -27,17 +27,12 @@ export class UsersEffects {
   ));
   login$ = createEffect(() => this.actions$.pipe(
     ofType(UsersActions.Login),
-    mergeMap((action) => {
-      const url = this.api.buildUrl({ route: `${UsersRoutes.Main}/${UsersRoutes.Login}` });
-      return this.api.post<{ token: string; user: User }>(url, action.payload).pipe(
-        map(res => {
-          this.cacheService.cache(AppCacheKeys.Token, res.token);
-          this.cacheService.cache(AppCacheKeys.User, res.user);
-          ListsActions.Load({ sUserID: res.user._id });
-          return res.user;
-        }),
-        map(user => (UsersActions.UserLoggedIn({ payload: user }))))
-    })));
+    map((action) => UsersActions.UserLoggedIn({ payload: action.payload }))
+  ));
+  userLoggedIn$ = createEffect(() => this.actions$.pipe(
+    ofType(UsersActions.UserLoggedIn),
+    map((action) => (ListsActions.Load({ sUserID: action.payload.id })))
+  ));
   getLists$ = createEffect(() => this.actions$.pipe(
     ofType(UsersActions.GetUsersLists),
     mergeMap((action) => {
@@ -52,10 +47,6 @@ export class UsersEffects {
       return this.api.post<User>(url, { token: action.payload }).pipe(
         map((user) => (UsersActions.UserLoggedIn({ payload: user }))))
     })));
-  userLoggedIn$ = createEffect(() => this.actions$.pipe(
-    ofType(UsersActions.UserLoggedIn),
-    map((action) => (ListsActions.Load({ sUserID: action.payload._id })))
-  ));
   addPublicList$ = createEffect(() => this.actions$.pipe(
     ofType(UsersActions.AddPulicList),
     mergeMap((action) => {

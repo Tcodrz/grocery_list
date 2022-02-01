@@ -37,6 +37,7 @@ export class ListComponent implements OnInit, OnChanges {
             list: {
               sName: listName,
               items: [],
+              aUserIDs: [this.user.id],
             },
             sUserID: this.user._id
           }

@@ -1,11 +1,11 @@
-import { User } from 'src/app/core/models/user.interface';
-import * as UsersActions from './../../../state/users/users.actions';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AppState } from 'src/app/state';
 import { Component, OnInit } from '@angular/core';
-import { List } from './../../models/list.interface';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { User } from 'src/app/core/models/user.interface';
+import { AppState } from 'src/app/state';
 import * as ListsAction from '../../../state/lists/lists.actions';
+import { List } from './../../models/list.interface';
 
 @Component({
   selector: 'gl-list-invite',
@@ -19,10 +19,10 @@ export class ListInviteComponent implements OnInit {
     private activeRoutes: ActivatedRoute,
     private router: Router,
     private store: Store<AppState>,
+    private auth: AngularFireAuth,
   ) { }
   ngOnInit(): void {
-    this.store.subscribe(({ listState, userState }) => {
-      this.user = userState.user;
+    this.store.subscribe(({ listState }) => {
       this.list = listState.listInvite;
     })
     this.activeRoutes.params.subscribe(params => {
@@ -31,8 +31,14 @@ export class ListInviteComponent implements OnInit {
     });
   }
   onGoToList(): void {
-    this.store.dispatch(UsersActions.AddPulicList({ sListID: this.list._id, sUserID: this.user._id }));
-    this.router.navigate(['admin']);
+    this.auth.user.subscribe(user => {
+      if (!!user) {
+        this.store.dispatch(ListsAction.AddUserToList({ payload: { userID: user.uid, listID: this.list.id, } }));
+        this.router.navigate(['admin']);
+      } else {
+        debugger; // should not occur -  if user is not logged in redirect him
+      }
+    })
   }
 
 }

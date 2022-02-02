@@ -21,8 +21,8 @@ const _listsReducer = createReducer(
     return { ...state, lists: Utils.sortListItems(action.payload) };
   }),
   on(ListsActions.ListAdded, (state, action) => {
-    const lists = [...state.lists, action.payload];
-    return { ...state, lists: Utils.sortListItems(lists) }
+    const lists = Utils.sortListItems([...state.lists, action.payload]);
+    return { ...state, lists: lists }
   }),
   on(ListsActions.ItemAddedToList, (state, action) => {
     const lists = Utils.sortListItems(Utils.updateList(state.lists, action.payload));
@@ -37,7 +37,7 @@ const _listsReducer = createReducer(
     return { ...state, lists: sorted }
   }),
   on(ListsActions.Reset, () => initialState),
-  on(ListsActions.DeleteList, (state, action) => ({ ...state, lists: state.lists.filter(list => list._id !== action.payload._id) })),
+  on(ListsActions.ListDeleted, (state, action) => ({ ...state, lists: state.lists.filter(list => list.id !== action.payload.id) })),
   on(ListsActions.ListFetched, (state, action) => ({ ...state, listInvite: action.payload })),
 );
 

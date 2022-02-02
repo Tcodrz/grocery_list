@@ -1,42 +1,31 @@
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Injectable } from "@angular/core";
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
-import { catchError, EMPTY, map, mergeMap } from 'rxjs';
-import { AppState } from '..';
-import * as UsersActions from '../users/users.actions';
-import { ApiListItemRoutes, ApiListRoutes, ApiRoutes } from './../../core/models/api-routes.enum';
+import { catchError, EMPTY, from, map, mergeMap } from 'rxjs';
 import { List } from './../../core/models/list.interface';
-import { User } from './../../core/models/user.interface';
-import { ApiService } from './../../shared/services/api.service';
 import * as ListsActions from './lists.actions';
-import { ListsState } from './lists.reducer';
 
 @Injectable()
 export class ListsEffects {
-  state: ListsState;
   load$ = createEffect(() => this.actions$.pipe(
     ofType(ListsActions.Load),
-    mergeMap((action) => {
-      const url = this.api.buildUrl({ route: `${ApiRoutes.Lists}/${ApiListRoutes.Load}` });
-      // return this.api.post<List[]>(url, { sUserID: action.sUserID })
-      return this.db.collection<List>('lists').valueChanges()
+    mergeMap((action) =>
+      this.db.collection<List>('lists').valueChanges()
         .pipe(
           map(lists => lists.filter(list => list.aUserIDs.includes(action.sUserID))),
           map(lists => (ListsActions.Loaded({ payload: lists })))
-        )
-    })
+        ))
   ));
   addList$ = createEffect(() => this.actions$.pipe(
     ofType(ListsActions.Add),
     mergeMap((action) => {
-      const url = this.api.buildUrl({ route: `${ApiRoutes.Lists}/${ApiListRoutes.AddList}` });
       const { list, sUserID } = action.payload;
-      return this.api.post<{ list: List, user: User }>(url, { list, sUserID })
+      return from(this.db.collection('lists').add(list))
         .pipe(
-          map(({ list, user }) => {
-            this.store.dispatch(UsersActions.UpdateUser({ payload: user }));
-            return ListsActions.ListAdded({ payload: list });
+          map((res) => {
+            const newList = { ...list, id: res.id };
+            this.db.doc(`lists/${res.id}`).set(newList);
+            return ListsActions.ListAdded({ payload: newList });
           }),
           catchError(() => EMPTY)
         )
@@ -61,22 +50,39 @@ export class ListsEffects {
       return ListsActions.Updated({ payload: list })
     })
   ));
+  delete$ = createEffect(() => this.actions$.pipe(
+    ofType(ListsActions.DeleteList),
+    map((action) => {
+      this.db.doc(`lists/${action.payload.id}`).delete();
+      return ListsActions.ListDeleted({ payload: action.payload });
+    })
+  ))
   fetchList$ = createEffect(() => this.actions$.pipe(
     ofType(ListsActions.FetchList),
     mergeMap((action) => {
-      const url = this.api.buildUrl({ route: `${ApiListRoutes.Main}/${ApiListRoutes.GetByID}` });
-      return this.api.post<List>(url, { sListID: action.sListID }).pipe(
-        map((list) => (ListsActions.ListFetched({ payload: list })))
-      );
+      return this.db.doc<List>(`lists/${action.sListID}`).get()
+        .pipe(
+          map(res => res.data()),
+          map((list) => (ListsActions.ListFetched({ payload: list })))
+        );
+    })
+  ));
+  addUserToList$ = createEffect(() => this.actions$.pipe(
+    ofType(ListsActions.AddUserToList),
+    mergeMap(action => {
+      const { userID, listID } = action.payload;
+      return this.db.doc<List>(`lists/${listID}`).get().pipe(
+        map((res) => res.data() as List),
+        map((list: List) => {
+          const newList = { ...list, aUserIDs: list.aUserIDs.concat(userID) }
+          this.db.doc(`lists/${list.id}`).set(newList);
+          return ListsActions.Load({ sUserID: userID });
+        })
+      )
     })
   ));
   constructor(
     private actions$: Actions,
-    private store: Store<AppState>,
-    private api: ApiService,
     private db: AngularFirestore,
-  ) { this.init(); }
-  init(): void {
-    this.store.select('listState').subscribe(state => this.state = state);
-  }
+  ) { }
 }

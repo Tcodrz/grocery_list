@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import * as ListsActions from 'src/app/state/lists/lists.actions';
-import { List } from './core/models/list.interface';
 import { User } from './core/models/user.interface';
 import { AppState } from './state';
 @Component({
@@ -13,15 +10,14 @@ import { AppState } from './state';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  bIsUserLoggedIn$: Observable<boolean>;
+  bIsUserLoggedIn: boolean;
   constructor(
     private store: Store<AppState>,
-    private db: AngularFirestore,
     private auth: AngularFireAuth
   ) { }
   ngOnInit(): void {
-    this.bIsUserLoggedIn$ = this.auth.user;
     this.auth.user.subscribe(u => {
+      this.bIsUserLoggedIn = !!u;
       if (!!u) {
         const user: User = {
           sName: u.displayName,

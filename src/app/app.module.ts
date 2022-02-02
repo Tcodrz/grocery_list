@@ -35,7 +35,7 @@ import { StateModule } from './state/state.module';
     ListModule,
     LoginModule,
     PrimeModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
+    ServiceWorkerModule.register('service-worker.js', {
       // or after 30 seconds (whichever comes first).
       // Register the ServiceWorker as soon as the app is stable
       enabled: environment.production,

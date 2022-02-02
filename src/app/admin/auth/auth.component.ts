@@ -1,9 +1,6 @@
-import { AppState } from 'src/app/state';
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { User } from './../../core/models/user.interface';
-import * as firebase from 'firebase'
-import * as UsersActions from '../../state/users/users.actions';
+import { AngularFireAuth } from '@angular/fire/auth';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'gl-auth',
@@ -13,20 +10,18 @@ import * as UsersActions from '../../state/users/users.actions';
 export class AuthComponent implements OnInit {
 
   constructor(
-    private store: Store<AppState>,
+    private auth: AngularFireAuth,
   ) { }
   ngOnInit(): void { }
   onLogin() {
+
+    this.auth.user.subscribe(user => console.log(user));
+
     const auth = firebase.auth();
-    auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
-      .then((res) => {
-        const user: User = {
-          sName: res.user.displayName,
-          sEmail: res.user.email,
-          sProfilePic: res.user.photoURL,
-          id: res.user.uid,
-        }
-        this.store.dispatch(UsersActions.Login({ payload: user }));
-      }).catch(error => console.error(error));
+
+    auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider()).then((res) => {
+      console.log(res);
+    })
+    auth.getRedirectResult().then((res) => console.log(res));
   }
 }

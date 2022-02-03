@@ -11,6 +11,7 @@ import { AppState } from './state';
 })
 export class AppComponent implements OnInit {
   bIsUserLoggedIn: boolean;
+  bIsLoading: boolean = true;
   constructor(
     private store: Store<AppState>,
     private auth: AngularFireAuth
@@ -18,6 +19,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.auth.user.subscribe(u => {
       this.bIsUserLoggedIn = !!u;
+      this.bIsLoading = false;
       if (!!u) {
         const user: User = {
           sName: u.displayName,

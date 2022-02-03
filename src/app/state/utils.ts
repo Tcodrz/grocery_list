@@ -14,5 +14,5 @@ export function sortListItems(lists: List[]): List[] {
   })
 }
 export function updateList(lists: List[], list: List): List[] {
-  return lists.map(l => l._id === list._id ? list : l)
+  return lists.map(l => l.id === list.id ? list : l)
 }

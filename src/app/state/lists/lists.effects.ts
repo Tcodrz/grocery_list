@@ -9,12 +9,13 @@ import * as ListsActions from './lists.actions';
 export class ListsEffects {
   load$ = createEffect(() => this.actions$.pipe(
     ofType(ListsActions.Load),
-    mergeMap((action) =>
-      this.db.collection<List>('lists').valueChanges()
+    mergeMap((action) => {
+      return this.db.collection<List>('lists').valueChanges()
         .pipe(
           map(lists => lists.filter(list => list.aUserIDs.includes(action.sUserID))),
           map(lists => (ListsActions.Loaded({ payload: lists })))
-        ))
+        )
+    })
   ));
   addList$ = createEffect(() => this.actions$.pipe(
     ofType(ListsActions.Add),
@@ -36,12 +37,12 @@ export class ListsEffects {
     map(action => {
       debugger;
       const { list, item } = action.payload;
-      const i = { ...item, id: this.db.createId() };
-      const newList = { ...list, items: list.items.concat(i) };
+      const newItem = { ...item, id: this.db.createId() };
+      const newList = { ...list, items: list.items.concat(newItem) };
       this.db.doc(`lists/${list.id}`).set(newList);
       return ListsActions.ItemAddedToList({ payload: newList });
     })
-  ))
+  ));
   update$ = createEffect(() => this.actions$.pipe(
     ofType(ListsActions.Update),
     map((action) => {
@@ -56,7 +57,7 @@ export class ListsEffects {
       this.db.doc(`lists/${action.payload.id}`).delete();
       return ListsActions.ListDeleted({ payload: action.payload });
     })
-  ))
+  ));
   fetchList$ = createEffect(() => this.actions$.pipe(
     ofType(ListsActions.FetchList),
     mergeMap((action) => {
@@ -74,9 +75,12 @@ export class ListsEffects {
       return this.db.doc<List>(`lists/${listID}`).get().pipe(
         map((res) => res.data() as List),
         map((list: List) => {
-          const newList = { ...list, aUserIDs: list.aUserIDs.concat(userID) }
-          this.db.doc(`lists/${list.id}`).set(newList);
-          return ListsActions.Load({ sUserID: userID });
+          if (!list.aUserIDs.includes(userID)) {
+            const aUserIDs = list.aUserIDs.concat(userID);
+            const newList = { ...list, aUserIDs: aUserIDs, bIsPublic: true }
+            this.db.doc(`lists/${list.id}`).set(newList);
+          }
+          return ListsActions.ListAdded({ payload: list });
         })
       )
     })

@@ -8,20 +8,18 @@ import * as firebase from 'firebase';
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit {
-
+  bIsLoading: boolean;
   constructor(
     private auth: AngularFireAuth,
   ) { }
   ngOnInit(): void { }
   onLogin() {
-
-    this.auth.user.subscribe(user => console.log(user));
-
+    this.auth.user.subscribe(user => {
+      this.bIsLoading = false;
+    });
     const auth = firebase.auth();
-
     auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider()).then((res) => {
       console.log(res);
     })
-    auth.getRedirectResult().then((res) => console.log(res));
   }
 }

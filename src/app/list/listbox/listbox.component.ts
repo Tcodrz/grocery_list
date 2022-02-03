@@ -63,8 +63,10 @@ export class ListboxComponent implements OnInit {
         break;
       default: debugger;
     }
-    const list: List = { ...this.list, items };
-    this.store.dispatch(ListsActions.Update({ payload: list }));
+    if (items.length > 0) {
+      const list: List = { ...this.list, items };
+      this.store.dispatch(ListsActions.Update({ payload: list }));
+    }
   }
   onAddItem(): void {
     this.modalService.open({
@@ -117,7 +119,7 @@ export class ListboxComponent implements OnInit {
   }
   private onShareList(): void {
     navigator.share({
-      url: `list-invite/${this.list._id}`,
+      url: `list-invite/${this.list.id}`,
       title: 'test',
       text: 'please click the link'
     }).then((res) => console.log('user invited')).catch(error => console.log(error));

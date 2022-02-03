@@ -1,9 +1,11 @@
-<ng-container *ngIf="!bIsUserLoggedIn">
-  <!-- <gl-login></gl-login> -->
+<ng-container *ngIf="!bIsUserLoggedIn && !bIsLoading">
   <gl-auth></gl-auth>
 </ng-container>
 <ng-container *ngIf="bIsUserLoggedIn">
   <router-outlet></router-outlet>
+</ng-container>
+<ng-container *ngIf="bIsLoading">
+  <gl-spinner></gl-spinner>
 </ng-container>
 
 <gl-modal-generic></gl-modal-generic>

@@ -34,7 +34,7 @@ export class ModalItemEditComponent implements OnInit {
     })
     this.item = this.params.inputs.item;
     this.form.patchValue(this.item);
-    const sUnit = this.aUnits.find(u => u.value === this.item.sUnit).value;
+    const sUnit = this.aUnits.find(u => u.value === this.item.sUnit)?.value;
     this.form.patchValue({ sUnit: sUnit });
   }
   onSubmit(): void {

@@ -48,7 +48,7 @@ export class TopnavComponent implements OnInit {
             icon: 'pi pi-list',
             items: listState.lists.map(list => ({
               label: list.sName,
-              command: (event) => this.goToList(list._id)
+              command: (event) => this.goToList(list.id)
             }))
           },
           {
@@ -73,7 +73,7 @@ export class TopnavComponent implements OnInit {
   }
 
   private goToList(sListID: string): void {
-    const iNextIndex = this.state.lists.findIndex(list => list._id === sListID);
+    const iNextIndex = this.state.lists.findIndex(list => list.id === sListID);
     this.store.dispatch(ListsActions.setCurrentList({ payload: iNextIndex }));
   }
   private onAddList(): void {

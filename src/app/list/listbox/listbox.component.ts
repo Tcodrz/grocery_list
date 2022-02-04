@@ -89,7 +89,7 @@ export class ListboxComponent implements OnInit {
       sComponent: 'item-edit',
       sTitle: this.aSelectedItems[0].sName,
       cb: (item: Item) => {
-        const items = this.list.items.map(i => i.id === item.id ? item : i);
+        const items = this.items.map(i => i.id === item.id ? item : i);
         const list = { ...this.list, items };
         this.store.dispatch(ListsActions.Update({ payload: list }));
       },

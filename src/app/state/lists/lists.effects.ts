@@ -45,7 +45,7 @@ export class ListsEffects {
   update$ = createEffect(() => this.actions$.pipe(
     ofType(ListsActions.Update),
     map((action) => {
-      const list = action.payload;
+      const list = { ...action.payload };
       this.db.doc(`lists/${list.id}`).set(list);
       return ListsActions.Updated({ payload: list })
     })

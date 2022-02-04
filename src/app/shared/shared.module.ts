@@ -13,6 +13,7 @@ import { PrimeModule } from './../prime/prime.module';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { TopnavComponent } from './components/topnav/topnav.component';
 import player from 'lottie-web';
+import { ModalListEditComponent } from './components/modal-list-edit/modal-list-edit.component';
 
 
 export function playerFactory() {
@@ -25,6 +26,7 @@ export function playerFactory() {
     ModalConfirmComponent,
     ModalGenericComponent,
     ModalItemEditComponent,
+    ModalListEditComponent,
     SpinnerComponent,
     TopnavComponent,
     UnitTypesPipe,
@@ -39,6 +41,7 @@ export function playerFactory() {
   ],
   exports: [
     ModalGenericComponent,
+    ModalListEditComponent,
     SpinnerComponent,
     TopnavComponent,
     UnitTypesPipe,

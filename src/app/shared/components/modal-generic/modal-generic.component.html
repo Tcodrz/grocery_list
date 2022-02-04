@@ -14,5 +14,7 @@
       (close)="onHide()"></gl-modal-confirm>
     <gl-modal-item-edit *ngIf="(modal$ | async).params.sComponent === 'item-edit'" [params]="(modal$ | async).params"
       (close)="onHide()"></gl-modal-item-edit>
+    <gl-modal-list-edit *ngIf="(modal$ | async).params.sComponent === 'list-edit'" [params]="(modal$ | async).params">
+    </gl-modal-list-edit>
   </p-dialog>
 </div>

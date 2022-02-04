@@ -1,0 +1,21 @@
+<div class="container p-2">
+  <div>
+    <span class="p-float-label">
+      <input type="text" id="listName" pInputText [(ngModel)]="list.sName" [disabled]="bIsTitleEditable">
+      <label for="listName">שם הרשימה</label>
+    </span>
+  </div>
+
+  <div class="mt-2">
+    <p-listbox [options]="users$ | async" [(ngModel)]="aSelectedItems" optionLabel="sName" [multiple]="false"
+      [filter]="false">
+      <ng-template let-item pTemplate="header">
+        חברים ברשימה זו
+      </ng-template>
+      <ng-template let-user pTemplate="item">
+        <img [src]="user.sProfilePic" alt="" class="profile-pic">
+        <h4 class="mr-2">{{ user.sName }}</h4>
+      </ng-template>
+    </p-listbox>
+  </div>
+</div>

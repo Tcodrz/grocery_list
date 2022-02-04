@@ -36,6 +36,7 @@ export class ListComponent implements OnInit, OnChanges {
           payload: {
             list: {
               sName: listName,
+              sListAdminID: this.user.id,
               items: [],
               aUserIDs: [this.user.id],
             },

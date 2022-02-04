@@ -39,6 +39,8 @@ const _listsReducer = createReducer(
   on(ListsActions.Reset, () => initialState),
   on(ListsActions.ListDeleted, (state, action) => ({ ...state, lists: state.lists.filter(list => list.id !== action.payload.id) })),
   on(ListsActions.ListFetched, (state, action) => ({ ...state, listInvite: action.payload })),
+  on(ListsActions.UserRemovedFromList, (state, action) => ({ ...state, lists: state.lists.filter(list => list.id !== action.payload.id) })),
+  on(ListsActions.ClearList, (state, action) => ({ ...state, lists: Utils.updateList(state.lists, action.payload) })),
 );
 
 export function listsReducer(state = initialState, action: Action): ListsState {

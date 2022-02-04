@@ -1,10 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { MenuItem } from 'primeng/api';
+import { map } from 'rxjs';
 import { Item } from 'src/app/core/models/item.interface';
 import { AppState } from 'src/app/state';
 import * as ListsActions from '../../state/lists/lists.actions';
 import { List } from './../../core/models/list.interface';
+import { User } from './../../core/models/user.interface';
 import { ModalGenericService } from './../../shared/services/modal-generic.service';
 
 enum ListActions {
@@ -22,16 +24,20 @@ enum ListActions {
 })
 export class ListboxComponent implements OnInit {
   @Input() list: List;
+  user: User;
   items: Item[] = [];
   aSelectedItems: Item[] = [];
   menuItems: MenuItem[];
   ListActions = ListActions;
   constructor(
     private modalService: ModalGenericService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
   ) { }
 
   ngOnInit(): void {
+    this.store.select('userState').pipe(
+      map(userState => userState.user))
+      .subscribe(user => this.user = user);
     this.items = this.list.items;
     this.initMenu();
   }
@@ -91,18 +97,52 @@ export class ListboxComponent implements OnInit {
     });
   }
   private initMenu(): void {
+    const bUserIsAdmin = this.list.sListAdminID === this.user.id;
     this.menuItems = [
       {
-        label: 'שיתוף רשימה',
-        icon: 'pi pi-envelope',
-        command: () => { this.onShareList(); }
+        label: 'עריכת רשימה',
+        icon: 'pi pi-pencil',
+        command: () => { this.onEditList() }
       },
-      {
+      this.list.bIsPublic && !bUserIsAdmin ?
+        {
+          label: 'הפסקת מעקב',
+          icon: 'pi pi-undo',
+          command: () => { this.onRemoveUserFromList() }
+        } : null,
+      !this.list.bIsPublic ? {
+        label: 'שיתוף רשימה',
+        icon: 'pi pi-share-alt',
+        command: () => { this.onShareList(); }
+      } : null,
+      bUserIsAdmin ? {
         label: 'מחיקת רשימה',
         icon: 'pi pi-trash',
         command: () => { this.onDeleteList() }
-      }
+      } : null,
+      this.list.items.length > 0 ? {
+        label: 'ניקוי רשימה',
+        icon: 'pi pi-times',
+        command: () => { this.onClearList() }
+      } : null,
     ];
+    this.menuItems = this.menuItems.filter(item => !!item);
+  }
+  private onRemoveUserFromList(): void {
+    this.store.dispatch(ListsActions.RemoveUserFromList({ payload: { userID: this.user.id, list: this.list } }));
+  }
+  private onEditList() {
+    this.modalService.open({
+      sComponent: 'list-edit',
+      sTitle: 'עריכת רשימה',
+      inputs: { list: this.list, },
+      cb: (list: List) => {
+        this.store.dispatch(ListsActions.Update({ payload: list }));
+      }
+    })
+  }
+  private onClearList() {
+    this.store.dispatch(ListsActions.ClearList({ payload: this.list }));
   }
   private onDeleteList(): void {
     const sEmptyListMsg = `למחוק את רשימת ${this.list.sName} ?`;

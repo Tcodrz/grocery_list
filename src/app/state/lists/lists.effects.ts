@@ -35,7 +35,6 @@ export class ListsEffects {
   addItem$ = createEffect(() => this.actions$.pipe(
     ofType(ListsActions.AddItemToList),
     map(action => {
-      debugger;
       const { list, item } = action.payload;
       const newItem = { ...item, id: this.db.createId() };
       const newList = { ...list, items: list.items.concat(newItem) };
@@ -85,6 +84,24 @@ export class ListsEffects {
       )
     })
   ));
+  removeUserFromList$ = createEffect(() => this.actions$.pipe(
+    ofType(ListsActions.RemoveUserFromList),
+    map(action => {
+      const { userID, list } = action.payload;
+      const newList = { ...list, aUserIDs: list.aUserIDs.filter(uid => uid !== userID) };
+      this.db.doc(`lists/${list.id}`).set(newList);
+      return ListsActions.UserRemovedFromList({ payload: newList });
+    })
+  ));
+  clearList$ = createEffect(() => this.actions$.pipe(
+    ofType(ListsActions.ClearList),
+    map(action => {
+      const list = action.payload;
+      const newList = { ...list, items: [] };
+      this.db.doc(`lists/${list.id}`).set(newList);
+      return ListsActions.ListCleared({ payload: newList });
+    })
+  ))
   constructor(
     private actions$: Actions,
     private db: AngularFirestore,

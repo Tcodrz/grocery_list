@@ -1,7 +1,7 @@
 <div class="container p-2">
   <div>
     <span class="p-float-label">
-      <input type="text" id="listName" pInputText [(ngModel)]="list.sName" [disabled]="bIsTitleEditable">
+      <input type="text" id="listName" pInputText [(ngModel)]="list.sName" [disabled]="!bIsTitleEditable">
       <label for="listName">שם הרשימה</label>
     </span>
   </div>

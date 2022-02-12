@@ -8,4 +8,5 @@ export interface Item {
   sUnit?: string;
   sComment?: string;
   dCreated: string;
+  links: string[];
 }

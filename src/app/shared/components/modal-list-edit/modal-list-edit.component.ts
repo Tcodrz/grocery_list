@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { AppState } from 'src/app/state';
 import { List } from './../../../core/models/list.interface';
 import { User } from './../../../core/models/user.interface';
@@ -25,7 +25,8 @@ export class ModalListEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.list = { ...this.params.inputs.list };
-    this.users$ = this.db.collection<User>('users').valueChanges();
+    this.users$ = this.db.collection<User>('users').valueChanges().pipe(
+      map(users => users.filter(user => this.list.aUserIDs.includes(user.id))));
     this.store.select('userState').subscribe(userState => {
       this.bIsTitleEditable = userState.user.id === this.list.sListAdminID;
     });

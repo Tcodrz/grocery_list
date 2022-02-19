@@ -1,3 +1,4 @@
+import { SortOptions } from 'src/app/core/models/sort-options.enum';
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { MenuItem } from 'primeng/api';
@@ -28,6 +29,7 @@ export class ListboxComponent implements OnInit {
   items: Item[] = [];
   aSelectedItems: Item[] = [];
   menuItems: MenuItem[];
+  sortItems: MenuItem[];
   ListActions = ListActions;
   constructor(
     private modalService: ModalGenericService,
@@ -40,6 +42,7 @@ export class ListboxComponent implements OnInit {
       .subscribe(user => this.user = user);
     this.items = this.list.items;
     this.initMenu();
+    this.initSortMenu();
   }
   get bShowAdd(): boolean { return this.aSelectedItems.length < 1; }
   get bShowCheck(): boolean { return this.aSelectedItems.length > 0 && this.aSelectedItems.every(item => !item.bChecked); }
@@ -80,7 +83,7 @@ export class ListboxComponent implements OnInit {
       sTitle: 'הוספת פריט',
       cb: (item: Item) => {
         item.sListID = this.list.id;
-        this.store.dispatch(ListsActions.AddItemToList({ payload: { list: this.list, item } }));
+        this.store.dispatch(ListsActions.ItemAdd({ payload: { list: this.list, item } }));
       }
     });
   }
@@ -128,6 +131,30 @@ export class ListboxComponent implements OnInit {
     ];
     this.menuItems = this.menuItems.filter(item => !!item);
   }
+  private initSortMenu() {
+    this.sortItems = [
+      {
+        label: 'נוצר ראשון',
+        icon: 'pi pi-sort-amount-up',
+        command: () => { this.onSortItems(SortOptions.OldestFirst); }
+      },
+      {
+        label: 'נוצר אחרון',
+        icon: ' pi pi-sort-amount-down',
+        command: () => { this.onSortItems(SortOptions.NewFirst); }
+      },
+      {
+        label: 'פתוחים קודם',
+        icon: 'pi pi-circle',
+        command: () => { this.onSortItems(SortOptions.CheckedLast); }
+      },
+      {
+        label: 'סגורים קודם',
+        icon: 'pi pi-check-circle',
+        command: () => { this.onSortItems(SortOptions.CheckedFirst); }
+      }
+    ]
+  }
   private onRemoveUserFromList(): void {
     this.store.dispatch(ListsActions.RemoveUserFromList({ payload: { userID: this.user.id, list: this.list } }));
   }
@@ -142,7 +169,7 @@ export class ListboxComponent implements OnInit {
     })
   }
   private onClearList() {
-    this.store.dispatch(ListsActions.ClearList({ payload: this.list }));
+    this.store.dispatch(ListsActions.ListClear({ payload: this.list }));
   }
   private onDeleteList(): void {
     const sEmptyListMsg = `למחוק את רשימת ${this.list.sName} ?`;
@@ -153,7 +180,7 @@ export class ListboxComponent implements OnInit {
       sMessage: this.items.length > 0 ? sNonEmptyListMsg : sEmptyListMsg,
       sIcon: 'pi pi-exclamation-triangle',
       cb: (confirm: boolean) => {
-        if (confirm) { this.store.dispatch(ListsActions.DeleteList({ payload: this.list })); }
+        if (confirm) { this.store.dispatch(ListsActions.ListDelete({ payload: this.list })); }
       }
     });
   }
@@ -163,5 +190,8 @@ export class ListboxComponent implements OnInit {
       title: 'test',
       text: 'please click the link'
     }).then((res) => console.log('user invited')).catch(error => console.log(error));
+  }
+  onSortItems(option: SortOptions) {
+    this.store.dispatch(ListsActions.SortItems({ payload: { listID: this.list.id, sortOption: option } }));
   }
 }

@@ -32,7 +32,7 @@ export class ListComponent implements OnInit, OnChanges {
     this.modal.open({
       sComponent: 'add-list', sTitle: 'הוספת רשימה',
       cb: (listName: string) => {
-        this.store.dispatch(ListsActions.Add({
+        this.store.dispatch(ListsActions.Create({
           payload: {
             list: {
               sName: listName,

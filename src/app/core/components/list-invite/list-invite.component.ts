@@ -27,7 +27,7 @@ export class ListInviteComponent implements OnInit {
     })
     this.activeRoutes.params.subscribe(params => {
       const sListID = params['sListID'];
-      if (sListID) this.store.dispatch(ListsAction.FetchList({ sListID: sListID as string }));
+      if (sListID) this.store.dispatch(ListsAction.ListFetch({ sListID: sListID as string }));
     });
   }
   onGoToList(): void {

@@ -6,13 +6,12 @@
   box-sizing: border-box;
 }
 
-body {
-  //   margin: 0;
-  //   padding: 0;
-}
-
 .p-listbox .p-listbox-header {
   padding: 0.5rem 1rem;
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 // FLEX
@@ -193,4 +192,14 @@ img.profile-pic {
   border: 3px solid #6366F1;
   padding: 0;
   border-radius: 50%;
+}
+
+// TABS
+.p-tabview .p-tabview-panels {
+  padding: 0;
+  margin-top: 10px;
+}
+
+.p-accordion .p-accordion-content {
+  padding: 0.5rem;
 }

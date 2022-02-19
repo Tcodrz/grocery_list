@@ -60,11 +60,11 @@ export class ProfileComponent implements OnInit {
         sMessage: 'רשימה זו אינה ריקה, למחוק?',
         sIcon: 'pi pi-exclamation-triangle',
         cb: (confirm) => {
-          if (confirm) { this.store.dispatch(ListsActions.DeleteList({ payload: this.selectedList })); }
+          if (confirm) { this.store.dispatch(ListsActions.ListDelete({ payload: this.selectedList })); }
         }
       })
     } else {
-      this.store.dispatch(ListsActions.DeleteList({ payload: this.selectedList }));
+      this.store.dispatch(ListsActions.ListDelete({ payload: this.selectedList }));
     }
   }
 }

@@ -35,6 +35,7 @@ export class ModalAddItemComponent implements OnInit {
       sName: this.form.value.sName,
       iAmount: this.form.value.iAmount,
       bChecked: false,
+      dCreated: new Date().getTime(),
     }
     this.params.cb(item);
     this.close.emit();

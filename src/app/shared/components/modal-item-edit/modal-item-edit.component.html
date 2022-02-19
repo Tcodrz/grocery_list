@@ -31,10 +31,13 @@
       <div *ngIf="links.length > 0">
         <h5>לינקים</h5>
         <span *ngFor="let link of links" class="flex space-between">
-          <a (click)="gotoLink(link)" class="link d-inline-block mb-1"> {{ link | slice : 0 : 30 }}
-            {{ link.length > 30 ? '...' : '' }}
+          <a (click)="gotoLink(link)" class="link d-inline-block mb-1"> {{ link | slice : 0 : 20 }}
+            {{ link.length > 20 ? '...' : '' }}
           </a>
-          <span class="d-inline-block"><i class="pi pi-times" (click)="removeLink(link)"></i></span>
+          <div class="ml-1">
+            <span class="d-inline-block"><i class="pi pi-clone pointer ml-2" (click)="copyToClipboard(link)"></i></span>
+            <span class="d-inline-block"><i class="pi pi-times pointer" (click)="removeLink(link)"></i></span>
+          </div>
         </span>
       </div>
       <div class="p-inputgroup">

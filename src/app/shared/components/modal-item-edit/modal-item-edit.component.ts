@@ -60,5 +60,5 @@ export class ModalItemEditComponent implements OnInit {
     window.open(link, '/');
   }
   removeLink(link: string): void { this.links = this.links.filter(l => l !== link); }
-
+  async copyToClipboard(link: string): Promise<void> { await navigator.clipboard.writeText(link); }
 }

@@ -18,7 +18,7 @@ export class ListsEffects {
     })
   ));
   addList$ = createEffect(() => this.actions$.pipe(
-    ofType(ListsActions.Add),
+    ofType(ListsActions.Create),
     mergeMap((action) => {
       const { list, sUserID } = action.payload;
       return from(this.db.collection('lists').add(list))
@@ -26,20 +26,20 @@ export class ListsEffects {
           map((res) => {
             const newList = { ...list, id: res.id };
             this.db.doc(`lists/${res.id}`).set(newList);
-            return ListsActions.ListAdded({ payload: newList });
+            return ListsActions.ListCreated({ payload: newList });
           }),
           catchError(() => EMPTY)
         )
     })
   ));
   addItem$ = createEffect(() => this.actions$.pipe(
-    ofType(ListsActions.AddItemToList),
+    ofType(ListsActions.ItemAdd),
     map(action => {
       const { list, item } = action.payload;
       const newItem = { ...item, id: this.db.createId() };
       const newList = { ...list, items: list.items.concat(newItem) };
       this.db.doc(`lists/${list.id}`).set(newList);
-      return ListsActions.ItemAddedToList({ payload: newList });
+      return ListsActions.ItemAdded({ payload: newList });
     })
   ));
   update$ = createEffect(() => this.actions$.pipe(
@@ -51,14 +51,14 @@ export class ListsEffects {
     })
   ));
   delete$ = createEffect(() => this.actions$.pipe(
-    ofType(ListsActions.DeleteList),
+    ofType(ListsActions.ListDelete),
     map((action) => {
       this.db.doc(`lists/${action.payload.id}`).delete();
       return ListsActions.ListDeleted({ payload: action.payload });
     })
   ));
   fetchList$ = createEffect(() => this.actions$.pipe(
-    ofType(ListsActions.FetchList),
+    ofType(ListsActions.ListFetch),
     mergeMap((action) => {
       return this.db.doc<List>(`lists/${action.sListID}`).get()
         .pipe(
@@ -79,7 +79,7 @@ export class ListsEffects {
             const newList = { ...list, aUserIDs: aUserIDs, bIsPublic: true }
             this.db.doc(`lists/${list.id}`).set(newList);
           }
-          return ListsActions.ListAdded({ payload: list });
+          return ListsActions.ListCreated({ payload: list });
         })
       )
     })
@@ -94,7 +94,7 @@ export class ListsEffects {
     })
   ));
   clearList$ = createEffect(() => this.actions$.pipe(
-    ofType(ListsActions.ClearList),
+    ofType(ListsActions.ListClear),
     map(action => {
       const list = action.payload;
       const newList = { ...list, items: [] };

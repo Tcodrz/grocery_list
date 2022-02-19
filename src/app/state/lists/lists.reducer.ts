@@ -18,14 +18,14 @@ export const initialState: ListsState = {
 const _listsReducer = createReducer(
   initialState,
   on(ListsActions.Loaded, (state, action) => {
-    return { ...state, lists: Utils.sortListItems(action.payload) };
+    return { ...state, lists: Utils.sortItemsInit(action.payload) };
   }),
-  on(ListsActions.ListAdded, (state, action) => {
-    const lists = Utils.sortListItems([...state.lists, action.payload]);
+  on(ListsActions.ListCreated, (state, action) => {
+    const lists = Utils.sortItemsInit([...state.lists, action.payload]);
     return { ...state, lists: lists }
   }),
-  on(ListsActions.ItemAddedToList, (state, action) => {
-    const lists = Utils.sortListItems(Utils.updateList(state.lists, action.payload));
+  on(ListsActions.ItemAdded, (state, action) => {
+    const lists = Utils.sortItemsInit(Utils.updateList(state.lists, action.payload));
     return { ...state, lists };
   }),
   on(ListsActions.setCurrentList, (state, action) => {
@@ -33,14 +33,21 @@ const _listsReducer = createReducer(
   }),
   on(ListsActions.Updated, (state, action) => {
     const lists = Utils.updateList(state.lists, action.payload);
-    const sorted = Utils.sortListItems(lists)
+    const sorted = Utils.sortItemsInit(lists)
     return { ...state, lists: sorted }
   }),
   on(ListsActions.Reset, () => initialState),
   on(ListsActions.ListDeleted, (state, action) => ({ ...state, lists: state.lists.filter(list => list.id !== action.payload.id) })),
   on(ListsActions.ListFetched, (state, action) => ({ ...state, listInvite: action.payload })),
   on(ListsActions.UserRemovedFromList, (state, action) => ({ ...state, lists: state.lists.filter(list => list.id !== action.payload.id) })),
-  on(ListsActions.ClearList, (state, action) => ({ ...state, lists: Utils.updateList(state.lists, action.payload) })),
+  on(ListsActions.ListClear, (state, action) => ({ ...state, lists: Utils.updateList(state.lists, action.payload) })),
+  on(ListsActions.SortItems, (state, action) => {
+    const { listID, sortOption } = action.payload;
+    return {
+      ...state,
+      lists: Utils.sortItems(state.lists, listID, sortOption)
+    }
+  })
 );
 
 export function listsReducer(state = initialState, action: Action): ListsState {

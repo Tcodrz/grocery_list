@@ -25,3 +25,12 @@
     left: calc(50% - 2.5rem);
   }
 }
+
+::ng-deep {
+  .uploading-mask {
+    .p-progressbar {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+}

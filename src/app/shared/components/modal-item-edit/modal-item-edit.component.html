@@ -1,7 +1,7 @@
 <div class="mt-3 item-edit-container">
   <div class="mb-2">
-    <gl-image-upload *ngIf="showUploadImage" (upload)="onUpload($event)"></gl-image-upload>
-    <gl-image-viewer [imageURL]="itemImage?.url" [isUploading]="isUploading" (deleteImage)="onDeleteImage()">
+    <gl-image-upload *ngIf="showUploadImage && !isLoading" (upload)="onUpload($event)"></gl-image-upload>
+    <gl-image-viewer [imageURL]="itemImage?.url" [isUploading]="isLoading" (deleteImage)="onDeleteImage()">
     </gl-image-viewer>
   </div>
   <form [formGroup]="form">

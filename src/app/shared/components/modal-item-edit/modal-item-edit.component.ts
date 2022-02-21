@@ -26,7 +26,7 @@ export class ModalItemEditComponent implements OnInit {
   ];
   selectedUnit: VLPair;
   itemImage: Image;
-  isUploading: boolean;
+  isLoading: boolean;
   constructor(
     private fb: FormBuilder,
     private uploadImageService: UploadImageService,
@@ -66,24 +66,24 @@ export class ModalItemEditComponent implements OnInit {
   removeLink(link: string): void { this.links = this.links.filter(l => l !== link); }
   onUpload(file: File): void {
     if (!!this.item.image && !!this.item.image.url) this.onDeleteImage();
-    this.isUploading = true;
+    this.isLoading = true;
     this.uploadImageService.readFile(file, (buffer: string | ArrayBuffer) => {
       this.itemImage = { url: buffer.toString() } as Image;
       this.uploadImageService.upload(file, ((image: Image) => {
         this.itemImage = image;
         const item = { ...this.item, image: image };
         this.params.cb(item);
-        this.isUploading = false;
+        this.isLoading = false;
       }))
     });
   }
   onDeleteImage() {
-    this.isUploading = true;
+    this.isLoading = true;
     this.itemImage = {} as Image;
     this.uploadImageService.deleteImage(this.item.image, () => {
       const item = { ...this.item, image: {} };
       this.params.cb(item);
-      this.isUploading = false;
+      this.isLoading = false;
     });
   }
   async copyToClipboard(link: string): Promise<void> { await navigator.clipboard.writeText(link); }

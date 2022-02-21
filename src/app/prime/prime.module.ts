@@ -11,6 +11,7 @@ import { MenubarModule } from 'primeng/menubar';
 import { MenuModule } from 'primeng/menu';
 import { NgModule } from '@angular/core';
 import { TabViewModule } from 'primeng/tabview';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 @NgModule({
   declarations: [],
@@ -24,8 +25,9 @@ import { TabViewModule } from 'primeng/tabview';
     InputTextareaModule,
     InputTextModule,
     ListboxModule,
-    MenuModule,
     MenubarModule,
+    MenuModule,
+    ProgressBarModule,
     TabViewModule,
   ],
   exports: [
@@ -38,8 +40,9 @@ import { TabViewModule } from 'primeng/tabview';
     InputTextareaModule,
     InputTextModule,
     ListboxModule,
-    MenuModule,
     MenubarModule,
+    MenuModule,
+    ProgressBarModule,
     TabViewModule,
   ]
 })

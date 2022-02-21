@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 export interface Modal {
   open: boolean;
@@ -10,7 +10,7 @@ export type ModalParams = {
   sTitle?: string;
   sMessage?: string;
   sIcon?: string;
-  cb?: Function;
+  cb?: (...args: any) => any;
   inputs?: any;
 };
 

@@ -1,9 +1,11 @@
-import { Units } from './../../../core/pipes/unit-types.pipe';
-import { VLPair } from './../../../core/models/types';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { Item } from 'src/app/core/models/item.interface';
-import { ModalParams } from './../../services/modal-generic.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Image, Item } from 'src/app/core/models/item.interface';
+import { VLPair } from './../../../core/models/types';
+import { Units } from './../../../core/pipes/unit-types.pipe';
+import { UploadImageService } from './../../../core/services/upload-image.service';
+import { ModalParams } from './../../services/modal-generic.service';
+
 
 @Component({
   selector: 'gl-modal-item-edit',
@@ -23,9 +25,13 @@ export class ModalItemEditComponent implements OnInit {
     { value: Units.Unit, label: 'יחידה' }
   ];
   selectedUnit: VLPair;
+  itemImage: Image;
+  isUploading: boolean;
   constructor(
     private fb: FormBuilder,
+    private uploadImageService: UploadImageService,
   ) { }
+  get showUploadImage() { return !this.itemImage?.url; }
   ngOnInit(): void {
     this.form = this.fb.group({
       sName: ['', null],
@@ -36,9 +42,10 @@ export class ModalItemEditComponent implements OnInit {
     })
     this.item = this.params.inputs.item;
     this.form.patchValue(this.item);
-    this.links = [...this.item.links] ?? [];
+    this.links = this.item?.links ? [...this.item.links] : [];
     const sUnit = this.aUnits.find(u => u.value === this.item.sUnit)?.value;
     if (sUnit) this.form.patchValue({ sUnit: sUnit });
+    this.itemImage = this.item.image ?? undefined;
   }
   addLink() {
     const link = this.form.get('link').value;
@@ -46,11 +53,8 @@ export class ModalItemEditComponent implements OnInit {
     this.form.controls['link'].reset();
   }
   onSubmit(): void {
-    const item = { ...this.item, ...this.form.value, links: this.links };
+    const item = { ...this.item, ...this.form.value, links: this.links, image: this.itemImage ?? undefined };
     this.params.cb(item);
-    this.close.emit();
-  }
-  onCancel(): void {
     this.close.emit();
   }
   gotoLink(link: string) {
@@ -60,5 +64,27 @@ export class ModalItemEditComponent implements OnInit {
     window.open(link, '/');
   }
   removeLink(link: string): void { this.links = this.links.filter(l => l !== link); }
+  onUpload(file: File): void {
+    if (!!this.item.image && !!this.item.image.url) this.onDeleteImage();
+    this.isUploading = true;
+    this.uploadImageService.readFile(file, (buffer: string | ArrayBuffer) => {
+      this.itemImage = { url: buffer.toString() } as Image;
+      this.uploadImageService.upload(file, ((image: Image) => {
+        this.itemImage = image;
+        const item = { ...this.item, image: image };
+        this.params.cb(item);
+        this.isUploading = false;
+      }))
+    });
+  }
+  onDeleteImage() {
+    this.isUploading = true;
+    this.itemImage = {} as Image;
+    this.uploadImageService.deleteImage(this.item.image, () => {
+      const item = { ...this.item, image: {} };
+      this.params.cb(item);
+      this.isUploading = false;
+    });
+  }
   async copyToClipboard(link: string): Promise<void> { await navigator.clipboard.writeText(link); }
 }

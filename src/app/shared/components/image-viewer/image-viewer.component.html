@@ -1,0 +1,15 @@
+<ng-container [ngTemplateOutlet]="isUploading ? uploading : img"></ng-container>
+
+<ng-template #img>
+  <div [ngClass]="showDeleteImageMask ? 'delete-img-mask' : '' ">
+    <i *ngIf="showDeleteImageMask" class="pi pi-trash" (click)="onDeleteImage()"></i>
+    <img [src]="imageURL" class="w-100" (click)="toggleDeleteImageMask()">
+  </div>
+</ng-template>
+<ng-template #uploading>
+  <div class="uploading-mask">
+    <!-- <i class="pi pi-spinner pi-spin"></i> -->
+    <p-progressBar mode="indeterminate"></p-progressBar>
+    <img [src]="imageURL" class="w-100">
+  </div>
+</ng-template>

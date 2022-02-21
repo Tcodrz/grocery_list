@@ -1,6 +1,6 @@
-import { Observable, tap } from 'rxjs';
-import { Modal, ModalGenericService, ModalParams } from './../../services/modal-generic.service';
 import { Component, OnInit } from '@angular/core';
+import { Observable, tap } from 'rxjs';
+import { Modal, ModalGenericService } from './../../services/modal-generic.service';
 
 @Component({
   selector: 'gl-modal-generic',

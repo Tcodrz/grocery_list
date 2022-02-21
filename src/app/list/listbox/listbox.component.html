@@ -1,8 +1,8 @@
-<p-listbox [options]="items" [(ngModel)]="aSelectedItems" optionLabel="sName" [multiple]="true" [filter]="true">
+<p-listbox [options]="items" [(ngModel)]="aSelectedItems" optionLabel="sName" [multiple]="true" [filter]="false">
   <ng-template let-item pTemplate="header">
     <div>
       <p-menu #menu [popup]="true" [model]="menuItems"></p-menu>
-      <button pButton class="p-button-text p-button-rounded p-button-primary" icon="pi pi-ellipsis-v"
+      <button pButton class="p-button-text p-button-rounded p-button-secondary" icon="pi pi-ellipsis-v"
         (click)="menu.toggle($event)"></button>
     </div>
     <div>
@@ -28,9 +28,12 @@
       <div>{{group}}</div>
     </ng-template>
     <div *ngIf="items.length > 0" [ngClass]="item.bChecked ? 'checked' : 'unchecked'">{{item.sName}}</div>
-    <div *ngIf="items.length > 0" [ngClass]="item.bChecked ? 'checked' : 'unchecked'">{{item.iAmount }}
-      <ng-container *ngIf="item.sUnit"> {{ item.sUnit | unitTypes }} </ng-container>
+    <div class="flex">
+      <div *ngIf="items.length > 0" [ngClass]="item.bChecked ? 'checked' : 'unchecked'" class="ml-1">{{item.iAmount }}
+        <ng-container *ngIf="item.sUnit"> {{ item.sUnit | unitTypes }} </ng-container>
+      </div>
+      <div *ngIf="item.links?.length > 0" class="ml-1"> <i class="pi pi-paperclip"></i> </div>
+      <div *ngIf="item.image?.url" class="ml-1"> <i class="pi pi-camera"></i> </div>
     </div>
-    <div *ngIf="item.links?.length > 0"> <i class="pi pi-paperclip"></i> </div>
   </ng-template>
 </p-listbox>

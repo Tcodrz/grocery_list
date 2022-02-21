@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { MenuItem } from 'primeng/api';
 import { map } from 'rxjs';
-import { Item } from 'src/app/core/models/item.interface';
+import { Item, Image } from 'src/app/core/models/item.interface';
 import { AppState } from 'src/app/state';
 import * as ListsActions from '../../state/lists/lists.actions';
 import { List } from './../../core/models/list.interface';
@@ -96,7 +96,16 @@ export class ListboxComponent implements OnInit {
         const list = { ...this.list, items };
         this.store.dispatch(ListsActions.Update({ payload: list }));
       },
-      inputs: { item: this.aSelectedItems[0] }
+      inputs: {
+        item: this.aSelectedItems[0],
+        cbAfterUpload: (image: Image) => {
+          let items = [...this.list.items];
+          const item = this.aSelectedItems[0];
+          items = items.map(i => item.id === i.id ? { ...i, image } : i);
+          const list = { ...this.list, items: items };
+          this.store.dispatch(ListsActions.Update({ payload: list }));
+        }
+      }
     });
   }
   private initMenu(): void {

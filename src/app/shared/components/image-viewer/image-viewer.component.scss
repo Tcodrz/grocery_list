@@ -1,0 +1,27 @@
+.delete-img-mask {
+  width: fit-content;
+  opacity: 0.5;
+  position: relative;
+
+  i {
+    display: block;
+    position: absolute;
+    font-size: 5rem;
+    opacity: 1;
+    color: black;
+    top: calc(50% - 2.5rem);
+    left: calc(50% - 2.5rem);
+  }
+}
+
+.uploading-mask {
+  opacity: 0.5;
+  position: relative;
+
+  i {
+    position: absolute;
+    font-size: 5rem;
+    top: calc(50% - 2.5rem);
+    left: calc(50% - 2.5rem);
+  }
+}

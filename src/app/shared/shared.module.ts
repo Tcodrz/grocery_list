@@ -14,6 +14,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { TopnavComponent } from './components/topnav/topnav.component';
 import player from 'lottie-web';
 import { ModalListEditComponent } from './components/modal-list-edit/modal-list-edit.component';
+import { ImageViewerComponent } from './components/image-viewer/image-viewer.component';
+import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 
 
 export function playerFactory() {
@@ -21,6 +23,7 @@ export function playerFactory() {
 }
 @NgModule({
   declarations: [
+    ImageViewerComponent,
     ModalAddItemComponent,
     ModalAddListComponent,
     ModalConfirmComponent,
@@ -30,6 +33,7 @@ export function playerFactory() {
     SpinnerComponent,
     TopnavComponent,
     UnitTypesPipe,
+    ImageUploadComponent,
   ],
   imports: [
     CommonModule,
@@ -40,6 +44,8 @@ export function playerFactory() {
     ReactiveFormsModule,
   ],
   exports: [
+    ImageViewerComponent,
+    ImageUploadComponent,
     ModalGenericComponent,
     ModalListEditComponent,
     SpinnerComponent,

@@ -9,4 +9,15 @@ export interface Item {
   sComment?: string;
   dCreated: number;
   links: string[];
+  image: Image;
+}
+
+export interface Image {
+  bucket: string;
+  url: string;
+  type: string;
+  path: string;
+  name: string;
+  timeCreated: Date;
+  updated: Date;
 }

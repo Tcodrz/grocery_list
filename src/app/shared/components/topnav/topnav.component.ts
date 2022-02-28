@@ -10,6 +10,7 @@ import { Store } from '@ngrx/store';
 import { User } from 'src/app/core/models/user.interface';
 import * as ListsActions from './../../../state/lists/lists.actions';
 import * as UsersActions from '../../../state/users/users.actions';
+import { ModalAddListComponent } from '../modal-add-list/modal-add-list.component';
 
 @Component({
   selector: 'gl-topnav',
@@ -78,7 +79,7 @@ export class TopnavComponent implements OnInit {
   }
   private onAddList(): void {
     this.modalService.open({
-      sComponent: 'add-list',
+      component: ModalAddListComponent,
       sTitle: 'הוספת רשימה'
     });
   }

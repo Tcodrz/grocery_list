@@ -1,3 +1,4 @@
+import { ModalComponent } from './../../../core/models/modal-component';
 import { AppState } from 'src/app/state';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -9,7 +10,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './modal-add-list.component.html',
   styleUrls: ['./modal-add-list.component.scss']
 })
-export class ModalAddListComponent implements OnInit {
+export class ModalAddListComponent implements OnInit, ModalComponent {
   @Input() params: ModalParams;
   @Output() close: EventEmitter<void> = new EventEmitter();
   form: FormGroup;

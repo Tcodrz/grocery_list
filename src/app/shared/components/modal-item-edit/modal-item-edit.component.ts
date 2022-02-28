@@ -1,3 +1,4 @@
+import { ModalComponent } from './../../../core/models/modal-component';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Image, Item } from 'src/app/core/models/item.interface';
@@ -12,7 +13,7 @@ import { ModalParams } from './../../services/modal-generic.service';
   templateUrl: './modal-item-edit.component.html',
   styleUrls: ['./modal-item-edit.component.scss']
 })
-export class ModalItemEditComponent implements OnInit {
+export class ModalItemEditComponent implements OnInit, ModalComponent {
   @Input() params: ModalParams;
   @Output() close: EventEmitter<void> = new EventEmitter<void>();
   item: Item;

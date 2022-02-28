@@ -1,3 +1,4 @@
+import { ModalComponent } from './../../../core/models/modal-component';
 import { Component, Input, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Store } from '@ngrx/store';
@@ -12,7 +13,7 @@ import { ModalParams } from './../../services/modal-generic.service';
   templateUrl: './modal-list-edit.component.html',
   styleUrls: ['./modal-list-edit.component.scss']
 })
-export class ModalListEditComponent implements OnInit {
+export class ModalListEditComponent implements OnInit, ModalComponent {
   @Input() params: ModalParams;
   users$: Observable<User[]>;
   list: List;

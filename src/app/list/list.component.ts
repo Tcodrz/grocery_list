@@ -1,3 +1,4 @@
+import { ModalAddListComponent } from './../shared/components/modal-add-list/modal-add-list.component';
 import { AppCacheKeys, CacheService } from './../core/services/cache.service';
 import { AppState } from '../state';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
@@ -30,7 +31,8 @@ export class ListComponent implements OnInit, OnChanges {
   }
   onAddList(): void {
     this.modal.open({
-      sComponent: 'add-list', sTitle: 'הוספת רשימה',
+      component: ModalAddListComponent,
+      sTitle: 'הוספת רשימה',
       cb: (listName: string) => {
         this.store.dispatch(ListsActions.Create({
           payload: {

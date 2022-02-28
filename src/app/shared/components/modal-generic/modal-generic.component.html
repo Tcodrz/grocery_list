@@ -1,22 +1,8 @@
 <div pFocusTrap>
   <p-dialog [(visible)]="bShow" (onHide)="onHide()">
     <ng-template pTemplate="header">
-      <div>
-        <i *ngIf="(modal$ | async).params.sIcon" [class]="(modal$ | async).params.sIcon"></i>
-        {{ (modal$ | async).params.sTitle }}
-      </div>
+      <div><i *ngIf="params.sIcon" [class]="params.sIcon"></i>{{ params.sTitle }}</div>
     </ng-template>
-    <gl-modal-add-item *ngIf="(modal$ | async).params.sComponent === 'add-item'" [params]="(modal$ | async).params"
-      (close)="onHide()"></gl-modal-add-item>
-    <gl-modal-add-list *ngIf="(modal$ | async).params.sComponent === 'add-list'" [params]="(modal$ | async).params"
-      (close)="onHide()"></gl-modal-add-list>
-    <gl-modal-confirm *ngIf="(modal$ | async).params.sComponent === 'confirm'" [params]="(modal$ | async).params"
-      (close)="onHide()"></gl-modal-confirm>
-    <gl-modal-item-edit *ngIf="(modal$ | async).params.sComponent === 'item-edit'" [params]="(modal$ | async).params"
-      (close)="onHide()"></gl-modal-item-edit>
-    <gl-modal-list-edit *ngIf="(modal$ | async).params.sComponent === 'list-edit'" [params]="(modal$ | async).params">
-    </gl-modal-list-edit>
-    <gl-image-viewer *ngIf="(modal$ | async).params.sComponent === 'image-viewer'"
-      [imageURL]="(modal$ | async).params.inputs.imageURL"></gl-image-viewer>
+    <div #modalContent></div>
   </p-dialog>
 </div>

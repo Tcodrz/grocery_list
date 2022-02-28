@@ -1,13 +1,18 @@
-import { SortOptions } from 'src/app/core/models/sort-options.enum';
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { MenuItem } from 'primeng/api';
 import { map } from 'rxjs';
-import { Item, Image } from 'src/app/core/models/item.interface';
+import { Item } from 'src/app/core/models/item.interface';
+import { SortOptions } from 'src/app/core/models/sort-options.enum';
+import { ModalListEditComponent } from 'src/app/shared/components/modal-list-edit/modal-list-edit.component';
 import { AppState } from 'src/app/state';
 import * as ListsActions from '../../state/lists/lists.actions';
 import { List } from './../../core/models/list.interface';
 import { User } from './../../core/models/user.interface';
+import { ImageViewerComponent } from './../../shared/components/image-viewer/image-viewer.component';
+import { ModalAddItemComponent } from './../../shared/components/modal-add-item/modal-add-item.component';
+import { ModalConfirmComponent } from './../../shared/components/modal-confirm/modal-confirm.component';
+import { ModalItemEditComponent } from './../../shared/components/modal-item-edit/modal-item-edit.component';
 import { ModalGenericService } from './../../shared/services/modal-generic.service';
 
 enum ListActions {
@@ -80,7 +85,7 @@ export class ListboxComponent implements OnInit {
   }
   onAddItem(): void {
     this.modalService.open({
-      sComponent: 'add-item',
+      component: ModalAddItemComponent,
       sTitle: 'הוספת פריט',
       cb: (item: Item) => {
         item.sListID = this.list.id;
@@ -90,7 +95,7 @@ export class ListboxComponent implements OnInit {
   }
   onItemEdit(): void {
     this.modalService.open({
-      sComponent: 'item-edit',
+      component: ModalItemEditComponent,
       sTitle: this.aSelectedItems[0].sName,
       cb: (item: Item) => {
         const items = this.items.map(i => i.id === item.id ? item : i);
@@ -163,7 +168,7 @@ export class ListboxComponent implements OnInit {
   }
   private onEditList() {
     this.modalService.open({
-      sComponent: 'list-edit',
+      component: ModalListEditComponent,
       sTitle: 'עריכת רשימה',
       inputs: { list: this.list, },
       cb: (list: List) => {
@@ -178,7 +183,7 @@ export class ListboxComponent implements OnInit {
     const sEmptyListMsg = `למחוק את רשימת ${this.list.sName} ?`;
     const sNonEmptyListMsg = `רשימת ${this.list.sName} אינה ריקה, למחוק?`;
     this.modalService.open({
-      sComponent: 'confirm',
+      component: ModalConfirmComponent,
       sTitle: 'אישור מחיקה',
       sMessage: this.items.length > 0 ? sNonEmptyListMsg : sEmptyListMsg,
       sIcon: 'pi pi-exclamation-triangle',
@@ -200,7 +205,7 @@ export class ListboxComponent implements OnInit {
   onImagePreview(item: Item) {
     this.itemReset = item;
     this.modalService.open({
-      sComponent: 'image-viewer',
+      component: ImageViewerComponent,
       sTitle: 'תצוגה מקדימה',
       sIcon: 'pi pi-camera',
       inputs: {

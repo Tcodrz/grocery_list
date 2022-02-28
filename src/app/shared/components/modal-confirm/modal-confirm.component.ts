@@ -1,3 +1,4 @@
+import { ModalComponent } from './../../../core/models/modal-component';
 import { ModalParams } from './../../services/modal-generic.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
@@ -6,7 +7,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   templateUrl: './modal-confirm.component.html',
   styleUrls: ['./modal-confirm.component.scss']
 })
-export class ModalConfirmComponent implements OnInit {
+export class ModalConfirmComponent implements OnInit, ModalComponent {
   @Input() params: ModalParams;
   @Output() close: EventEmitter<void> = new EventEmitter();
   constructor() { }

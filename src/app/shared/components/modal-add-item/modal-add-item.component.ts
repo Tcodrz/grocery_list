@@ -1,3 +1,4 @@
+import { ModalComponent } from './../../../core/models/modal-component';
 import { ModalParams } from './../../services/modal-generic.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -12,7 +13,7 @@ import { ListsState } from './../../../state/lists/lists.reducer';
   templateUrl: './modal-add-item.component.html',
   styleUrls: ['./modal-add-item.component.scss']
 })
-export class ModalAddItemComponent implements OnInit {
+export class ModalAddItemComponent implements OnInit, ModalComponent {
   @Output() close: EventEmitter<void> = new EventEmitter();
   @Input() params: ModalParams;
   form: FormGroup;

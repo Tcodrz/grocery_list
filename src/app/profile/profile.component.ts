@@ -1,3 +1,4 @@
+import { ModalConfirmComponent } from './../shared/components/modal-confirm/modal-confirm.component';
 import { ModalGenericService } from './../shared/services/modal-generic.service';
 import * as ListsActions from 'src/app/state/lists/lists.actions';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -55,7 +56,8 @@ export class ProfileComponent implements OnInit {
   onDeleteList(): void {
     if (this.selectedList.items.length > 0) {
       this.modalService.open({
-        sComponent: 'confirm',
+        // sComponent: 'confirm',
+        component: ModalConfirmComponent,
         sTitle: 'אישור מחיקה',
         sMessage: 'רשימה זו אינה ריקה, למחוק?',
         sIcon: 'pi pi-exclamation-triangle',

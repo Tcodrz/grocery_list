@@ -16,5 +16,7 @@
       (close)="onHide()"></gl-modal-item-edit>
     <gl-modal-list-edit *ngIf="(modal$ | async).params.sComponent === 'list-edit'" [params]="(modal$ | async).params">
     </gl-modal-list-edit>
+    <gl-image-viewer *ngIf="(modal$ | async).params.sComponent === 'image-viewer'"
+      [imageURL]="(modal$ | async).params.inputs.imageURL"></gl-image-viewer>
   </p-dialog>
 </div>

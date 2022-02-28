@@ -1,4 +1,4 @@
-<div class="mt-3 item-edit-container">
+<div class="mt-1 item-edit-container">
   <div class="mb-2">
     <gl-image-upload *ngIf="showUploadImage && !isLoading" (upload)="onUpload($event)"></gl-image-upload>
     <gl-image-viewer [imageURL]="itemImage?.url" [isUploading]="isLoading" (deleteImage)="onDeleteImage()">
@@ -7,7 +7,7 @@
   <form [formGroup]="form">
     <div class="p-inputgroup">
       <span class="p-float-label mb-2">
-        <input pInputText type="text" formControlName="sName" id="sName" class="w-80" autofocus>
+        <input pInputText type="text" formControlName="sName" id="sName" class="w-80">
         <label for="sName">שם פריט</label>
       </span>
     </div>

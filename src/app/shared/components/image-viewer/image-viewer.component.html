@@ -1,9 +1,14 @@
-<ng-container [ngTemplateOutlet]="isUploading ? uploading : img"></ng-container>
+<div class="mt-1">
+  <ng-container [ngTemplateOutlet]="isUploading ? uploading : img"></ng-container>
+</div>
 
 <ng-template #img>
   <div [ngClass]="showDeleteImageMask ? 'delete-img-mask' : '' ">
+    <div *ngIf="isLoading" class="p-3">
+      <gl-spinner></gl-spinner>
+    </div>
     <i *ngIf="showDeleteImageMask" class="pi pi-trash" (click)="onDeleteImage()"></i>
-    <img [src]="imageURL" class="w-100" (click)="toggleDeleteImageMask()">
+    <img #imgElement [src]="imageURL" class="w-100" (click)="toggleDeleteImageMask()">
   </div>
 </ng-template>
 <ng-template #uploading>

@@ -33,7 +33,7 @@
         <ng-container *ngIf="item.sUnit"> {{ item.sUnit | unitTypes }} </ng-container>
       </div>
       <div *ngIf="item.links?.length > 0" class="ml-1"> <i class="pi pi-paperclip"></i> </div>
-      <div *ngIf="item.image?.url" class="ml-1"> <i class="pi pi-camera"></i> </div>
+      <div *ngIf="item.image?.url" class="ml-1"> <i class="pi pi-camera" (click)="onImagePreview(item)"></i> </div>
     </div>
   </ng-template>
 </p-listbox>

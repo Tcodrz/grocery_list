@@ -27,23 +27,17 @@ export class UploadImageService {
     this.storage.ref(filename).put(file)
       .then(res => {
         if (res.state === 'success') {
-          const image: Partial<Image> = {
-            bucket: res.metadata.bucket,
-            type: res.metadata.contentType,
-            path: res.metadata.fullPath,
-            name: res.metadata.name,
-            timeCreated: new Date(res.metadata.timeCreated),
-            updated: new Date(res.metadata.updated),
-          }
+          const image: Image = this.buildImage(res);
           this.storage.ref(image.path).getDownloadURL().then(url => {
             image.url = url;
-            callback(image as Image);
+            callback(image);
           });
         };
       });
   }
   deleteImage(image: Image, callback: () => void) {
-    this.storage.ref(image.name).delete().then(() => {
+    const ref = this.storage.ref(image.name);
+    ref.delete().then(() => {
       callback();
     }).catch(err => {
       console.error(err);
@@ -53,5 +47,17 @@ export class UploadImageService {
   private buildFileName(name: string): string {
     const id = this.db.createId();
     return `${id}_${name}`;
+  }
+  private buildImage(task: UploadTask): Image {
+    const metadata = task.metadata;
+    const image: Partial<Image> = {
+      bucket: metadata.bucket,
+      type: metadata.contentType,
+      path: metadata.fullPath,
+      name: metadata.name,
+      timeCreated: new Date(metadata.timeCreated),
+      updated: new Date(metadata.updated),
+    }
+    return image as Image;
   }
 }

@@ -45,7 +45,7 @@ export class ModalItemEditComponent implements OnInit {
     this.links = this.item?.links ? [...this.item.links] : [];
     const sUnit = this.aUnits.find(u => u.value === this.item.sUnit)?.value;
     if (sUnit) this.form.patchValue({ sUnit: sUnit });
-    this.itemImage = this.item.image ?? undefined;
+    this.itemImage = this.item.image ?? {} as Image; // can not be saved in firestore with undefined value
   }
   addLink() {
     const link = this.form.get('link').value;
@@ -65,7 +65,7 @@ export class ModalItemEditComponent implements OnInit {
   }
   removeLink(link: string): void { this.links = this.links.filter(l => l !== link); }
   onUpload(file: File): void {
-    if (!!this.item.image && !!this.item.image.url) this.onDeleteImage();
+    if (!!this.itemImage && this.itemImage.url) this.onDeleteImage();
     this.isLoading = true;
     this.uploadImageService.readFile(file, (buffer: string | ArrayBuffer) => {
       this.itemImage = { url: buffer.toString() } as Image;
@@ -79,8 +79,8 @@ export class ModalItemEditComponent implements OnInit {
   }
   onDeleteImage() {
     this.isLoading = true;
-    this.itemImage = {} as Image;
-    this.uploadImageService.deleteImage(this.item.image, () => {
+    this.uploadImageService.deleteImage(this.itemImage, () => {
+      this.itemImage = {} as Image;
       const item = { ...this.item, image: {} };
       this.params.cb(item);
       this.isLoading = false;

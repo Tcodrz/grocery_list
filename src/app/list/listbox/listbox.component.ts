@@ -31,6 +31,7 @@ export class ListboxComponent implements OnInit {
   menuItems: MenuItem[];
   sortItems: MenuItem[];
   ListActions = ListActions;
+  itemReset: Item;
   constructor(
     private modalService: ModalGenericService,
     private store: Store<AppState>,
@@ -98,13 +99,6 @@ export class ListboxComponent implements OnInit {
       },
       inputs: {
         item: this.aSelectedItems[0],
-        cbAfterUpload: (image: Image) => {
-          let items = [...this.list.items];
-          const item = this.aSelectedItems[0];
-          items = items.map(i => item.id === i.id ? { ...i, image } : i);
-          const list = { ...this.list, items: items };
-          this.store.dispatch(ListsActions.Update({ payload: list }));
-        }
       }
     });
   }
@@ -202,5 +196,22 @@ export class ListboxComponent implements OnInit {
   }
   onSortItems(option: SortOptions) {
     this.store.dispatch(ListsActions.SortItems({ payload: { listID: this.list.id, sortOption: option } }));
+  }
+  onImagePreview(item: Item) {
+    this.itemReset = item;
+    this.modalService.open({
+      sComponent: 'image-viewer',
+      sTitle: 'תצוגה מקדימה',
+      sIcon: 'pi pi-camera',
+      inputs: {
+        imageURL: item.image.url
+      },
+    });
+    this.modalService.closed().subscribe(() => {
+      if (!!this.itemReset) {
+        this.aSelectedItems = this.aSelectedItems.filter(i => i !== this.itemReset);
+        this.itemReset = undefined;
+      }
+    });
   }
 }

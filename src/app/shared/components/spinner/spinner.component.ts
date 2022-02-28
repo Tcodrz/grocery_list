@@ -8,7 +8,7 @@ import { AnimationOptions } from 'ngx-lottie';
 })
 export class SpinnerComponent implements OnInit {
   options: AnimationOptions = {
-    path: '../../assets/spinner/spinner.json',
+    path: '../../assets/spinner/spinner2.json',
   };
   constructor(
   ) { }
